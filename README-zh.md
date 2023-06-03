@@ -7,6 +7,13 @@ Hamsterbase Highlighter 是一款多功能的网页高亮软件，它允许用�
 易于使用：只需选择要突出显示的文本并单击即可。
 保存您的突出显示内容：轻松将您的突出显示保存到 Notion、hamsterbase。
 
+## 从 Github 安装
+
+从 `Release` 页面下载 `hamsterbase-highlighter-{版本号}.zip`
+进入 `chrome://extensions/` 页面，在右上角勾选“开发者模式”。
+在电脑上找到 ZIP 文件并解压缩。
+回到 `chrome://extensions/` 页面，点击“加载已解压的扩展程序”按钮，选择解压后的扩展程序文件夹来安装它。
+
 ### 隐私政策
 
 我们非常重视您的隐私。本隐私政策描述了我们的插件如何收集和使用您的个人信息。
