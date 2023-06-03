@@ -6,3 +6,11 @@
   justify-content: center;
   height: 500px;
 }
+
+.title {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  font-weight: 500;
+  margin-bottom: 4px;
+}

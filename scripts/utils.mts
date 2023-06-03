@@ -47,8 +47,10 @@ export async function generateManifest() {
           {
             type: "module",
             matches: ["<all_urls>"],
-            js: ["./content-script/contentScript.js"],
-            css: ["./content-script/style.css"],
+            js: [
+              "./content-script/style.css.js",
+              "./content-script/contentScript.js",
+            ],
           },
         ],
         permissions: ["activeTab", "pageCapture", "storage", "contextMenus"],

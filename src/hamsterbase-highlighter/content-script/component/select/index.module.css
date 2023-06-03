@@ -1,3 +1,19 @@
-.control:hover {
-  border-color: rgb(48, 204, 204) !important;
+.control {
+  border-color: #e6e6e6 !important;
+  padding: 0 6px 0 2px;
+
+  &:hover {
+    border-color: #30cccc !important;
+  }
+}
+
+.control-focused {
+  border-color: #30cccc !important;
+  box-shadow: none !important;
+}
+
+.indicators-container {
+  & div {
+    padding: 4px;
+  }
 }

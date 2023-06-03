@@ -25,7 +25,7 @@ const ServiceStatus: React.FC<{ status: WebpageBackendStatus | null }> = (
   props
 ) => {
   if (!props.status || props.status.type === "success") {
-    return <div style={{ height: 8 }}></div>;
+    return <div style={{ height: 16 }}></div>;
   }
   return (
     <div
@@ -34,6 +34,7 @@ const ServiceStatus: React.FC<{ status: WebpageBackendStatus | null }> = (
         lineHeight: "14px",
         marginTop: 4,
         marginBottom: 6,
+        fontSize: 12,
       }}
     >
       {props.status.message}
@@ -86,7 +87,7 @@ export const SettingPage = () => {
 
   return (
     <div>
-      <div style={{ height: 8, width: "100%" }}></div>
+      <Space></Space>
       <SettingItem
         title={localize("setting.account_title", "Backend Service")}
         subTitle={localize(
@@ -103,7 +104,7 @@ export const SettingPage = () => {
           )
         }
       />
-      <Space></Space>
+      <Space height={8}></Space>
       <Select
         block
         {...getFormOptionProps(settings, StorageKeys.backend)}
@@ -150,6 +151,7 @@ export const SettingPage = () => {
             )}
             label={localize("setting.notion_token", "Notion Token")}
           />
+          <Space></Space>
           <FormItem
             {...getFormOptionProps(
               settings,

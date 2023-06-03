@@ -202,6 +202,7 @@ export class HighlightPainterService
     const styleElement = document.createElement("style");
     styleElement.setAttribute("id", this.styleId);
     styleElement.textContent = styleContent;
+
     document.body.append(styleElement);
   }
 

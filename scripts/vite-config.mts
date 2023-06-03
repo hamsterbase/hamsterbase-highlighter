@@ -3,6 +3,7 @@ import { dirname, join, resolve } from "path";
 import postcssNesting from "postcss-nesting";
 import { fileURLToPath } from "url";
 import { UserConfigExport } from "vite";
+import globalCss from "./global-css.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -18,7 +19,7 @@ export function getRollUpConfig(
   process.env.EXTENSION_MODE = watch ? "development" : "production";
   const commonConfig: UserConfigExport = {
     //@ts-ignore
-    plugins: [react()],
+    plugins: [react(), globalCss()],
     define: {
       "process.env": process.env,
     },

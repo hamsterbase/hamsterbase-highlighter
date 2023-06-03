@@ -8,6 +8,7 @@ import {
   WebpageBackendStatus,
 } from "../../services/webpage/common/webpage-service";
 import styles from "./index.module.css";
+import { Space } from "@/content-script/component/space";
 
 const ErrorStatus: React.FC<{ message: string }> = (props) => {
   return <div className={styles.errorMessage}>{props.message}</div>;
@@ -41,12 +42,14 @@ export const Webpage = () => {
 
   return (
     <div>
-      <div>Title</div>
+      <Space />
+      <div className={styles.title}>Title</div>
       <TextArea
         value={webpageService.currentWebpage.title}
         onChange={() => {}}
       />
-      <div>Url</div>
+      <Space />
+      <div className={styles.title}>Url</div>
       <TextArea value={webpageService.currentWebpage.url} onChange={() => {}} />
     </div>
   );

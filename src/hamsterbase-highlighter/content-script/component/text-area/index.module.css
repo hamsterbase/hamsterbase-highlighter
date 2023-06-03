@@ -9,12 +9,12 @@
   padding: 8px 4px;
   width: 100%;
   outline: none;
+  box-sizing: border-box;
 }
 
 .text-area:focus {
   border-color: rgb(48, 204, 204);
-  box-shadow: rgb(48, 204, 204) 0px 0px 0px 1px;
 }
 .text-area:hover {
-  color: #666666;
+  border-color: rgb(48, 204, 204);
 }

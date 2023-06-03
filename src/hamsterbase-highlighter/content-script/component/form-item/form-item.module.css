@@ -34,5 +34,4 @@
 
 .form-input:focus {
   border-color: rgb(48, 204, 204);
-  box-shadow: rgb(48, 204, 204) 0px 0px 0px 1px;
 }

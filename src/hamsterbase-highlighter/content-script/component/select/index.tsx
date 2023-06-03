@@ -1,5 +1,8 @@
 import React from "react";
 import RCSelect from "react-select";
+import classNames from "classnames";
+import Down from "@icon-park/react/es/icons/Down";
+
 import styles from "./index.module.css";
 
 interface Option {
@@ -26,31 +29,30 @@ export const Select: React.FC<SelectOption> = (props) => {
           props.onChange(v.value);
         }
       }}
+      theme={(theme) => ({
+        ...theme,
+        borderRadius: 4,
+        colors: {
+          ...theme.colors,
+          primary25: "#D7F2F3",
+          primary: "rgb(48, 204, 204)",
+        },
+      })}
       classNames={{
-        control: () => styles.control,
+        control: ({ isFocused }) =>
+          classNames(styles.control, isFocused && styles.controlFocused),
+        indicatorsContainer: () => classNames(styles.indicatorsContainer),
       }}
       styles={{
-        control: (baseStyles, state) => {
-          const focusStats: React.CSSProperties = state.isFocused
-            ? {
-                boxShadow: "rgb(48, 204, 204) 0px 0px 0px 1px",
-                borderColor: "rgb(48, 204, 204)",
-              }
-            : {};
-
-          // https://react-select.com/styles#inner-components
+        control: (baseStyles) => {
           return {
             ...baseStyles,
             width: props.block ? "100%" : 88,
             minHeight: "32px",
             fontSize: "14px",
             lineHeight: "14px",
-            borderColor: state.isFocused ? "#E6E6E6" : "#E6E6E6",
-            borderRadius: 4,
-            ...focusStats,
           };
         },
-
         valueContainer: (baseStyles) => {
           return {
             ...baseStyles,
@@ -60,14 +62,13 @@ export const Select: React.FC<SelectOption> = (props) => {
         option: (baseStyles) => {
           return {
             ...baseStyles,
-            fontSize: "14px",
-            padding: "2px 2px",
+            fontSize: "12px",
           };
         },
       }}
       components={{
-        DropdownIndicator: () => null,
         IndicatorSeparator: () => null,
+        DropdownIndicator: () => <Down theme="outline" size="16" />,
       }}
       placeholder=""
       options={props.options as any}

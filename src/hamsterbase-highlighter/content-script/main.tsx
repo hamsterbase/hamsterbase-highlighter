@@ -33,6 +33,8 @@ import {
 import { App } from "./app";
 import { HamsterbaseHighlighterContext } from "./context";
 import { HighlightController } from "./controller/highlight-controller";
+import { CacheProvider } from "@emotion/react";
+import createCache from "@emotion/cache";
 
 class Main {
   async load() {
@@ -76,16 +78,31 @@ class Main {
 
   private loadUI(instantiationService: IInstantiationService) {
     const HamsterbaseHighlighterRoot = document.createElement("div");
+    HamsterbaseHighlighterRoot.setAttribute("h", "2");
+
+    const renderIn = document.createElement("div");
+
     document.body.appendChild(HamsterbaseHighlighterRoot);
+
+    const shadow = HamsterbaseHighlighterRoot.attachShadow({ mode: "open" });
+    shadow.appendChild(renderIn);
+
+    const cache = createCache({
+      container: renderIn,
+      key: "hamsterbase",
+    });
+
     ReactDOM.render(
       <HamsterbaseHighlighterContext.Provider
         value={{
           instantiationService,
         }}
       >
-        <App />
+        <CacheProvider value={cache}>
+          <App />
+        </CacheProvider>
       </HamsterbaseHighlighterContext.Provider>,
-      HamsterbaseHighlighterRoot
+      renderIn
     );
   }
 

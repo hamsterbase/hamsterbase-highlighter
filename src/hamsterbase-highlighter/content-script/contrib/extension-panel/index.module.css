@@ -9,6 +9,8 @@
   color: #333;
   padding: 16px;
   font-family: Barlow, "PingFang SC", Helvetica, Arial, sans-serif;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
 }
 
 .panel-header {

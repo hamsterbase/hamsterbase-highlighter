@@ -5,6 +5,10 @@
   align-items: center;
   justify-content: center;
   border-radius: 2px;
+
+  & span {
+    display: contents;
+  }
 }
 
 .icon:hover {

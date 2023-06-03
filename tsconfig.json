@@ -9,6 +9,7 @@
     "lib": ["DOM", "DOM.Iterable"],
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react",
