@@ -20,7 +20,7 @@ export interface IExtensionPanelService {
 export class ExtensionPanelService implements IExtensionPanelService {
   readonly _serviceBrand: undefined;
 
-  public visible = true;
+  public visible = false;
 
   private _onStatusChange = new Emitter<void>();
   public onStatusChange: Event<void> = this._onStatusChange.event;

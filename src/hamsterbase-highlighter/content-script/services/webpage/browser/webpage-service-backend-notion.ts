@@ -1,3 +1,4 @@
+import { localize } from "@/locales/nls";
 import { Client } from "@notionhq/client";
 import { PageObjectResponse } from "@notionhq/client/build/src/api-endpoints";
 import { INativeService } from "../../native-service/common/native-service";
@@ -37,7 +38,8 @@ export class NotionService implements IHighlightService {
   constructor(
     private nativeService: INativeService,
     private token: string,
-    private databaseId: string
+    private databaseId: string,
+    private agree: boolean
   ) {
     this.client = new Client({
       auth: token,
@@ -277,13 +279,25 @@ export class NotionService implements IHighlightService {
     if (!this.token) {
       return {
         type: "error",
-        message: "Endpoint is empty",
+        message: localize("backend.notion.token_empty", "token is empty"),
       };
     }
     if (!this.databaseId) {
       return {
         type: "error",
-        message: "databaseId is empty",
+        message: localize(
+          "backend.notion.database_id_empty",
+          "database id is empty"
+        ),
+      };
+    }
+    if (!this.agree) {
+      return {
+        type: "error",
+        message: localize(
+          "backend.notion.agree_empty",
+          "Please allow the extension to access and modify the database."
+        ),
       };
     }
     try {

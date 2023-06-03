@@ -68,7 +68,8 @@ export class WebpageService implements IWebpageService {
         return new NotionService(
           this.nativeService,
           config["backend.notion.token"],
-          config["backend.notion.databaseId"]
+          config["backend.notion.databaseId"],
+          config["backend.notion.license"]
         );
       }
       default: {

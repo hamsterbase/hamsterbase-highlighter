@@ -1,4 +1,7 @@
 {
+  "backend.notion.agree_empty": "请允许扩展访问和修改数据库。",
+  "backend.notion.database_id_empty": "数据库 ID 为空",
+  "backend.notion.token_empty": "Token 为空",
   "error.unsupportedService": "不支持的服务: {0}",
   "extension_context_menus.block_highlightPage": "阻止此页面",
   "extension_context_menus.highlightPage": "高亮页面",
@@ -17,9 +20,8 @@
   "setting.auto_on_title": "自动开启",
   "setting.hamsterbase_entrypoint": "HamsterBase 入口点",
   "setting.hamsterbase_token": "HamsterBase 令牌",
-  "setting.language_subtitle": "请选择语言",
-  "setting.language_title": "语言",
   "setting.notion_database_id": "Notion 数据库 ID",
+  "setting.notion_license_checkbox": "允许扩展访问和修改数据库。",
   "setting.notion_token": "Notion 令牌",
   "webpage_empty": "网页未保存"
 }

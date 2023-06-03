@@ -1,4 +1,7 @@
 {
+  "backend.notion.agree_empty": "Please allow the extension to access and modify the database.",
+  "backend.notion.database_id_empty": "database id is empty",
+  "backend.notion.token_empty": "token is empty",
   "error.unsupportedService": "Unsupported service: {0}",
   "extension_context_menus.block_highlightPage": "Block This Page",
   "extension_context_menus.highlightPage": "Highlight Page",
@@ -17,9 +20,8 @@
   "setting.auto_on_title": "Auto On",
   "setting.hamsterbase_entrypoint": "HamsterBase Entrypoint",
   "setting.hamsterbase_token": "HamsterBase Token",
-  "setting.language_subtitle": "Please select language",
-  "setting.language_title": "Language",
   "setting.notion_database_id": "Notion Database id",
+  "setting.notion_license_checkbox": "Allow the extension to access and modify the database.",
   "setting.notion_token": "Notion Token",
   "webpage_empty": "Webpage is not saved"
 }

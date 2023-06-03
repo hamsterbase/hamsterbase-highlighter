@@ -1,5 +1,6 @@
 import fail from "@/assets/fail.svg?url";
 import success from "@/assets/success.svg?url";
+import { CheckBox } from "@/content-script/component/checkbox";
 import { Space } from "@/content-script/component/space";
 import { TextArea } from "@/content-script/component/text-area";
 import { localize } from "@/locales/nls";
@@ -159,6 +160,21 @@ export const SettingPage = () => {
             )}
             label={localize("setting.notion_database_id", "Notion Database id")}
           />
+          <Space></Space>
+          <div style={{ display: "flex" }}>
+            <span style={{ fontSize: 12, lineHeight: "14px" }}>
+              {localize(
+                "setting.notion_license_checkbox",
+                "Allow the extension to access and modify the database."
+              )}
+            </span>
+            <CheckBox
+              {...getFormOptionProps(
+                settings,
+                StorageKeys["backend.notion.license"]
+              )}
+            />
+          </div>
         </div>
       )}
       <Space></Space>

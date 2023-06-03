@@ -8,6 +8,7 @@ export enum StorageKeys {
   "backend.hamsterbase.token" = "backend.hamsterbase.token",
   "backend.notion.token" = "backend.notion.token",
   "backend.notion.databaseId" = "backend.notion.databaseId",
+  "backend.notion.license" = "backend.notion.license",
   autoOn = "autoOn",
   autoOnBlockList = "autoOnBlockList",
 }
@@ -18,6 +19,7 @@ export const defaultSettingValue = {
   [StorageKeys["backend.hamsterbase.token"]]: "",
   [StorageKeys["backend.notion.token"]]: "",
   [StorageKeys["backend.notion.databaseId"]]: "",
+  [StorageKeys["backend.notion.license"]]: false,
   [StorageKeys.autoOn]: false,
   [StorageKeys.autoOnBlockList]: "",
 };
