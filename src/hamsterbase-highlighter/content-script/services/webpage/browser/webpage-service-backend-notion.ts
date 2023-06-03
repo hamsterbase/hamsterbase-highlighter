@@ -50,7 +50,7 @@ export class NotionService implements IHighlightService {
           body: option!.body,
         } as any);
         return {
-          ok: true,
+          ok: res.status === 200,
           text: async () => {
             return res.body;
           },
@@ -279,7 +279,7 @@ export class NotionService implements IHighlightService {
     if (!this.token) {
       return {
         type: "error",
-        message: localize("backend.notion.token_empty", "token is empty"),
+        message: localize("backend.notion.token_empty", "API token is empty"),
       };
     }
     if (!this.databaseId) {
