@@ -1,7 +1,6 @@
 import fs from "fs/promises";
 import { dirname, join, resolve } from "path";
 import { fileURLToPath } from "url";
-import { version } from "../package.json";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -26,13 +25,15 @@ export async function copyAssets() {
 }
 
 export async function generateManifest() {
+  const { version } = JSON.parse(resolveFile("package.json"));
+
   await fs.writeFile(
     join(DistRoot, "manifest.json"),
     JSON.stringify(
       {
         manifest_version: 3,
         name: "Hamsterbase Highlighter",
-        version: version,
+        version,
         action: {},
         background: {
           service_worker: "./background/content.js",
