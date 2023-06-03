@@ -1,6 +1,7 @@
 import fs from "fs/promises";
 import { dirname, join, resolve } from "path";
 import { fileURLToPath } from "url";
+import { version } from "../package.json";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -30,8 +31,8 @@ export async function generateManifest() {
     JSON.stringify(
       {
         manifest_version: 3,
-        name: "hamsterbase",
-        version: "0.1.0",
+        name: "Hamsterbase Highlighter",
+        version: version,
         action: {},
         background: {
           service_worker: "./background/content.js",
