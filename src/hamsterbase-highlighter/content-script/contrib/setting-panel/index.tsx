@@ -146,6 +146,9 @@ export const SettingPage = () => {
       {settings.backend === "notion" && (
         <div>
           <FormItem
+            help={
+              "https://developers.notion.com/docs/create-a-notion-integration#step-1-create-an-integration"
+            }
             {...getFormOptionProps(
               settings,
               StorageKeys["backend.notion.token"]
@@ -154,6 +157,9 @@ export const SettingPage = () => {
           />
           <Space></Space>
           <FormItem
+            help={
+              "https://developers.notion.com/docs/create-a-notion-integration#step-3-save-the-database-id"
+            }
             {...getFormOptionProps(
               settings,
               StorageKeys["backend.notion.databaseId"]

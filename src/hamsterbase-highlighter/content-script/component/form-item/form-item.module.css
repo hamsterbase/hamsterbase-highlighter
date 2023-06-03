@@ -35,3 +35,13 @@
 .form-input:focus {
   border-color: rgb(48, 204, 204);
 }
+
+.help {
+  color: #999999;
+  margin-left: 8px;
+  vertical-align: middle;
+
+  &:hover {
+    color: #333;
+  }
+}

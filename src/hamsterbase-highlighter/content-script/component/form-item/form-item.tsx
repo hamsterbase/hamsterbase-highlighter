@@ -1,17 +1,25 @@
+import Help from "@icon-park/react/es/icons/Help";
+import classNames from "classnames";
 import React from "react";
 import styles from "./form-item.module.css";
-import classNames from "classnames";
-
 export interface FormItemProps {
   label: string;
   value: string;
   onChange: (value: string) => void;
+  help?: string;
 }
 
 export const FormItem: React.FC<FormItemProps> = (props) => {
   return (
     <div className={classNames(styles.formItem)}>
-      <div className={styles.formItemLabel}>{props.label}:</div>
+      <div className={styles.formItemLabel}>
+        {props.label}
+        {!!props.help && (
+          <a href={props.help} target="_blank" className={styles.help}>
+            <Help></Help>
+          </a>
+        )}
+      </div>
       <div>
         {
           <input
