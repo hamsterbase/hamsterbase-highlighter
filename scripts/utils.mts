@@ -25,7 +25,9 @@ export async function copyAssets() {
 }
 
 export async function generateManifest() {
-  const { version } = JSON.parse(resolveFile("package.json"));
+  const { version } = JSON.parse(
+    await fs.readFile(resolveFile("package.json"), "utf-8")
+  );
 
   await fs.writeFile(
     join(DistRoot, "manifest.json"),
