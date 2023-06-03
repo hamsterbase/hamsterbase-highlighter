@@ -9,10 +9,13 @@ Hamsterbase Highlighter 是一款多功能的网页高亮软件，它允许用�
 
 ## 从 Github 安装
 
-从 `Release` 页面下载 `hamsterbase-highlighter-{版本号}.zip`
-进入 `chrome://extensions/` 页面，在右上角勾选“开发者模式”。
-在电脑上找到 ZIP 文件并解压缩。
-回到 `chrome://extensions/` 页面，点击“加载已解压的扩展程序”按钮，选择解压后的扩展程序文件夹来安装它。
+1. 从 `Release` 页面下载 `hamsterbase-highlighter-{版本号}.zip`
+
+2. 进入 `chrome://extensions/` 页面，在右上角勾选“开发者模式”。
+
+3. 在电脑上找到 ZIP 文件并解压缩。
+
+4. 回到 `chrome://extensions/` 页面，点击“加载已解压的扩展程序”按钮，选择解压后的扩展程序文件夹来安装它。
 
 ### 隐私政策
 

@@ -9,10 +9,10 @@ Hamsterbase Highlighter is a versatile web highlighting software that allows use
 
 ## Install From Github
 
-Download the hamsterbase-highlighter-{version}.zip from release page
-Go to chrome://extensions/ and check the box for Developer mode in the top right.
-Locate the ZIP file on your computer and unzip it.
-Go back to the chrome://extensions/ page and click the Load unpacked extension button and select the unzipped folder for your extension to install it.
+1. Download the hamsterbase-highlighter-{version}.zip from release page
+2. Go to chrome://extensions/ and check the box for Developer mode in the top right.
+3. Locate the ZIP file on your computer and unzip it.
+4. Go back to the chrome://extensions/ page and click the Load unpacked extension button and select the unzipped folder for your extension to install it.
 
 ## Privacy Policy
 
