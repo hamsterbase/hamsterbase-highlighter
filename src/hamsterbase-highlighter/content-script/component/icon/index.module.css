@@ -1,0 +1,21 @@
+.icon {
+  height: 24px;
+  width: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 2px;
+}
+
+.icon:hover {
+  background: linear-gradient(0deg, #e6e6e6, #e6e6e6), #f7f8fa;
+}
+
+.active {
+  background: linear-gradient(0deg, #e6e6e6, #e6e6e6), #f7f8fa;
+}
+
+.disabled {
+  color: #ccc;
+  cursor: not-allowed;
+}

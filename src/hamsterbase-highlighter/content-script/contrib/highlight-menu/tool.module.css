@@ -1,0 +1,147 @@
+.highlighter-tool-container {
+  --yellow: #ffdd83;
+  --green: #30cccc;
+  --green-active: #2bb8b8;
+  --dark-green: #405983;
+  --light-gray: #f5f5f5;
+  --gray: #a8a8a8;
+  --danger: #d0021b;
+
+  position: absolute;
+  box-shadow: rgb(0 0 0 / 10%) 0 0 12px;
+  z-index: 10000;
+  border: 1px solid var(--light-gray);
+  border-radius: 8px;
+  background: white;
+}
+
+.box {
+  display: flex;
+  width: fit-content;
+  box-sizing: border-box;
+  padding: 0 2px;
+  color: black;
+}
+
+.item {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  cursor: pointer;
+  margin: 4px 2px;
+  border-radius: 50%;
+
+  .highlight-tooltip-container {
+    background: #fff;
+    border: 1px solid #f7f8fa;
+    height: 28px;
+    box-sizing: border-box;
+    display: flex;
+    padding: 0 8px;
+    border-radius: 4px;
+    color: #666;
+    align-items: center;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    white-space: nowrap;
+    margin-bottom: 8px;
+    position: absolute;
+    z-index: 100;
+    bottom: 100%;
+    visibility: hidden;
+
+    .highlight-tooltip-label {
+      display: inline-block;
+      margin-right: 8px;
+    }
+
+    .highlight-tooltip-shortcut-container {
+      display: inline-flex;
+    }
+
+    .highlight-tooltip-shortcut-key {
+      display: inline-flex;
+      background: #f7f8fa;
+      min-width: 16px;
+      box-sizing: border-box;
+      height: 16px;
+      padding: 4px;
+      align-items: center;
+      justify-content: center;
+      border-radius: 2px;
+      margin-left: 4px;
+    }
+  }
+}
+
+.item:hover {
+  background: var(--green-active);
+  color: #fff;
+  transition: all 0.2s;
+}
+
+.item.delete-highlight:hover {
+  background: var(--danger);
+}
+
+.item:hover .highlight-tooltip-container {
+  visibility: visible;
+}
+
+.highlight-note {
+  width: 300px;
+  border: none;
+  resize: none;
+  overflow-y: hidden;
+  border-radius: 2px;
+  padding: 4px;
+  outline: none;
+}
+
+.input-note {
+  margin-top: 10px;
+  position: absolute;
+  top: 100%;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: rgb(0 0 0 / 10%) 0 0 12px;
+  padding: 4px;
+}
+
+.input-note .footer {
+  display: flex;
+  padding: 8px 0 4px;
+  justify-content: flex-end;
+}
+
+.input-note button {
+  padding: 6px 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.input-note button:hover {
+  background: var(--light-gray);
+}
+
+.save-button {
+  color: var(--green);
+}
+
+.delete-line {
+  position: absolute;
+  bottom: -1px;
+  right: 0;
+  transform: scaleX(1.5);
+  transform: rotate(45deg) scaleX(2);
+}
+
+.delete-icon {
+  position: relative;
+}

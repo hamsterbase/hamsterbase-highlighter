@@ -1,0 +1,18 @@
+.extension-panel-container {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  background: #f7f8fa;
+  width: 320px;
+  z-index: 10000000;
+  min-height: 500px;
+  color: #333;
+  padding: 16px;
+  font-family: Barlow, "PingFang SC", Helvetica, Arial, sans-serif;
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

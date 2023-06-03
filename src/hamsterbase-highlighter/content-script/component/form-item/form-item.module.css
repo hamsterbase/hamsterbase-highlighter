@@ -1,0 +1,38 @@
+.form-item {
+  width: 100%;
+}
+
+.form-item-label {
+  padding-right: 16px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 4px;
+  font-size: 14px;
+  line-height: 22px;
+}
+
+.form-item-right {
+  flex: 1;
+}
+
+.form-input {
+  height: 32px;
+  background: #ffffff;
+  border: 1px solid #e6e6e6;
+  border-radius: 4px;
+  padding-left: 8px;
+  font-size: 14px;
+  line-height: 17px;
+  color: #666666;
+  outline-style: none;
+  box-sizing: border-box;
+}
+
+.form-input:hover {
+  border-color: rgb(48, 204, 204);
+}
+
+.form-input:focus {
+  border-color: rgb(48, 204, 204);
+  box-shadow: rgb(48, 204, 204) 0px 0px 0px 1px;
+}

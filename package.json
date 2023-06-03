@@ -1,0 +1,40 @@
+{
+  "name": "hamsterbase-highlighter",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:hamsterbase/hamsterbase-highlighter.git",
+  "author": "monster <monster@hamsterbase.com>",
+  "scripts": {
+    "build": "ts-node --esm scripts/build.mts",
+    "dev": "ts-node --esm scripts/dev.mts",
+    "format": "ts-node --esm scripts/format.mts"
+  },
+  "devDependencies": {
+    "@types/babel__traverse": "^7.20.1",
+    "@babel/traverse": "^7.22.4",
+    "@hamsterbase/sdk": "^0.3.0",
+    "@hamsterbase/third-party": "^0.3.1",
+    "@icon-park/react": "^1.4.2",
+    "@notionhq/client": "^2.2.5",
+    "@types/chrome": "^0.0.236",
+    "@types/react": "^18.0.28",
+    "@types/react-dom": "^18.0.11",
+    "@vitejs/plugin-react": "^4.0.0",
+    "dayjs": "^1.11.7",
+    "eslint": "^8.38.0",
+    "globby": "^13.1.4",
+    "minimatch": "^9.0.1",
+    "postcss-nesting": "^11.2.2",
+    "rc-checkbox": "^3.0.1",
+    "rc-select": "^14.5.1",
+    "rc-switch": "^4.1.0",
+    "rc-textarea": "^1.2.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-select": "^5.7.3",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.4",
+    "vite": "^4.3.2",
+    "vitest": "^0.31.2"
+  }
+}

@@ -1,0 +1,21 @@
+.hamsterbase-highlight-class {
+  background: #fffd99;
+  color: black !important;
+}
+
+[data-highlight-split-type="head"]::after {
+  content: "" !important;
+}
+
+[data-highlight-split-type="none"]::after {
+  content: "" !important;
+}
+
+.pseudo-placeholder::after {
+  font-family: icon;
+  content: "\e600";
+}
+
+.no-pseudo-content::after {
+  content: "" !important;
+}

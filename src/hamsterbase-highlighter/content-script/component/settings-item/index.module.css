@@ -1,0 +1,19 @@
+.settings-item {
+  display: flex;
+  justify-content: space-between;
+}
+
+.title {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  font-weight: 500px;
+  margin-bottom: 4px;
+}
+
+.subtitle {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+  color: #999;
+}

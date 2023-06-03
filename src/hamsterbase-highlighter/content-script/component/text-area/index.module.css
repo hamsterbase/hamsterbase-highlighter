@@ -1,0 +1,20 @@
+.text-area {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  color: #666666;
+  border: 1px solid #e0e0e0;
+  background: #ffffff;
+  border-radius: 4px;
+  padding: 8px 4px;
+  width: 100%;
+  outline: none;
+}
+
+.text-area:focus {
+  border-color: rgb(48, 204, 204);
+  box-shadow: rgb(48, 204, 204) 0px 0px 0px 1px;
+}
+.text-area:hover {
+  color: #666666;
+}

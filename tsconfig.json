@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "composite": true,
+    "skipLibCheck": true,
+    "experimentalDecorators": true,
+    "moduleResolution": "bundler",
+    "target": "ESNext",
+    "module": "ESNext",
+    "lib": ["DOM", "DOM.Iterable"],
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react",
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["./src/hamsterbase-highlighter/*"],
+      "vscf/*": ["./src/vscf/*"],
+      "vs/*": ["./src/vscf/internal/*"],
+      "@hamsterbase-third-party-internal/*": [
+        "./node_modules/@hamsterbase/third-party/dist/*"
+      ]
+    }
+  },
+  "include": ["src", "scripts", "src/**/**.json"]
+}
