@@ -1,3 +1,4 @@
+import { IClipboardService } from "@/content-script/services/clipboard/common/clipboardService";
 import { localize } from "@/locales/nls";
 import CopyOne from "@icon-park/react/es/icons/CopyOne";
 import HighLight from "@icon-park/react/es/icons/HighLight";
@@ -88,6 +89,7 @@ export const TakeNote: React.FC<{
 
 export const HighlightTool = () => {
   const HighlightMenuService = useService(IHighlightMenuService);
+  const clipboardService = useService(IClipboardService);
   useEventRender(HighlightMenuService.onControllerChange);
   useEventRender(HighlightMenuService.controller?.onStatusChange);
 
@@ -136,6 +138,15 @@ export const HighlightTool = () => {
                     }
                     case "note": {
                       controller.highlightAndTakeNote();
+                      break;
+                    }
+                    case "copy": {
+                      if (controller.state.type === "open_highlight_toolbar") {
+                        clipboardService.writeText(
+                          controller.state.option.range.text
+                        );
+                        controller.dispose();
+                      }
                       break;
                     }
                   }

@@ -22,6 +22,8 @@ import { WebpageService } from "@/content-script/services/webpage/browser/webpag
 import { IWebpageService } from "@/content-script/services/webpage/common/webpage-service";
 import "@/locales/nls";
 import { localize } from "@/locales/nls";
+import createCache from "@emotion/cache";
+import { CacheProvider } from "@emotion/react";
 import React from "react";
 import ReactDOM from "react-dom";
 import {
@@ -33,8 +35,8 @@ import {
 import { App } from "./app";
 import { HamsterbaseHighlighterContext } from "./context";
 import { HighlightController } from "./controller/highlight-controller";
-import { CacheProvider } from "@emotion/react";
-import createCache from "@emotion/cache";
+import { BrowserClipboardService } from "./services/clipboard/browser/clipboardService";
+import { IClipboardService } from "./services/clipboard/common/clipboardService";
 
 class Main {
   async load() {
@@ -195,6 +197,10 @@ class Main {
   private initServices(): IInstantiationService {
     const serviceCollection = new ServiceCollection();
     serviceCollection.set(ISettingService, new SyncDescriptor(ChromeStorage));
+    serviceCollection.set(
+      IClipboardService,
+      new SyncDescriptor(BrowserClipboardService)
+    );
     serviceCollection.set(INativeService, new SyncDescriptor(NativeService));
     serviceCollection.set(
       IHighlightMenuService,
