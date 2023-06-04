@@ -268,7 +268,7 @@ export class NotionService implements IHighlightService {
   }
 
   async ping() {
-    const cacheKey = `token: ${this.token} databaseId: ${this.databaseId}`;
+    const cacheKey = `token: ${this.token} databaseId: ${this.databaseId} agree: ${this.agree}`;
     if (!NotionService.pingCache.has(cacheKey)) {
       NotionService.pingCache.set(cacheKey, this.doPing());
     }
