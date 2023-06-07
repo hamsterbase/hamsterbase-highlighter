@@ -24,8 +24,9 @@ export class HamsterBaseHighlightService implements IHighlightService {
     private token: string
   ) {
     this.client = new HamsterBase({
-      endpoint: this.endpoint,
-      token: this.token,
+      // just prevent error
+      endpoint: this.endpoint || "endpoint",
+      token: this.token || "token",
       requestLib: this.nativeService.workerRequest,
     });
   }
