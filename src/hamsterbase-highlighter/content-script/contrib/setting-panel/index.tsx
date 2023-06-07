@@ -167,7 +167,7 @@ export const SettingPage = () => {
             label={localize("setting.notion_database_id", "Notion Database id")}
           />
           <Space></Space>
-          <div style={{ display: "flex" }}>
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
             <span style={{ fontSize: 12, lineHeight: "14px" }}>
               {localize(
                 "setting.notion_license_checkbox",

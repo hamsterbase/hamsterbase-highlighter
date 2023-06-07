@@ -1,5 +1,8 @@
+import { localize } from "@/locales/nls";
 import { HamsterBase, WebsiteExt } from "@hamsterbase/sdk";
+import semver from "semver";
 import { VSBuffer, encodeBase64 } from "vscf/base/common/buffer";
+import { INativeService } from "../../native-service/common/native-service";
 import {
   AddHighlightOption,
   IClipWebpageOption,
@@ -9,7 +12,6 @@ import {
   WebpageDetail,
   WebpagePingStatus,
 } from "../common/webpage-service-backend";
-import { INativeService } from "../../native-service/common/native-service";
 
 export class HamsterBaseHighlightService implements IHighlightService {
   readonly _serviceBrand: undefined;
@@ -99,20 +101,27 @@ export class HamsterBaseHighlightService implements IHighlightService {
     if (!this.endpoint) {
       return {
         type: "error",
-        message: "Endpoint is empty",
+        message: localize("hamsterbase.endpoint", "Please input endpoint"),
       };
     }
     if (!this.token) {
       return {
         type: "error",
-        message: "Token is empty",
+        message: localize("hamsterbase.token", "Please input token"),
       };
     }
     try {
-      await this.client.webpages.list({
-        page: 1,
-        per_page: 1,
-      });
+      const extensionVersion = await this.client.version();
+      const version = extensionVersion.version;
+      if (!semver.gte(version, "0.7.1")) {
+        return {
+          type: "error",
+          message: localize(
+            "hamsterbase.version",
+            "HamsterBase must be version 0.7.1 or higher"
+          ),
+        };
+      }
     } catch (error) {
       return {
         type: "error",

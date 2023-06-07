@@ -207,7 +207,7 @@ export class NotionService implements IHighlightService {
   ): Promise<string> {
     const highlightDatabaseId = this.highlightDatabaseId.get(webpageId);
     if (!highlightDatabaseId) {
-      throw new Error("");
+      throw new Error("highlightDatabaseId is required");
     }
     const res = await this.client.pages.create({
       parent: {
@@ -272,7 +272,11 @@ export class NotionService implements IHighlightService {
     if (!NotionService.pingCache.has(cacheKey)) {
       NotionService.pingCache.set(cacheKey, this.doPing());
     }
-    return NotionService.pingCache.get(cacheKey)!;
+    const res = await NotionService.pingCache.get(cacheKey)!;
+    if (res.type === "error") {
+      NotionService.pingCache.delete(cacheKey);
+    }
+    return res;
   }
 
   async doPing(): Promise<WebpagePingStatus> {
