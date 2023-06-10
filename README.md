@@ -7,6 +7,10 @@ Hamsterbase Highlighter is a versatile web highlighting software that allows use
 - Easy to use: simply select the text you wish to highlight and click
 - Save your highlights: easily save your highlights to notion, hamsterbase.
 
+## Install
+
+1. [Chrome WebStore](https://chrome.google.com/webstore/detail/hamsterbase-highlighter/mlcjehmgjhkjejbhbpfejgeeolahhnhc)
+
 ## Install From Github
 
 1. Download the hamsterbase-highlighter-{version}.zip from release page
