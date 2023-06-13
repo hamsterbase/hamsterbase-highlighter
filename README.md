@@ -35,4 +35,6 @@ If you choose to bind our plugin with `Notion` and enable the auto on feature, w
 
 All content that resides under the "src/vscf" is copy from the [VS Code] project. The VS Code project is licensed under the [MIT License].
 
+All content that resides under the "scripts" is under the [MIT License].
+
 Hamsterbase Highlighter is licensed under the GNU AFFERO GENERAL PUBLIC LICENSE Version 3, 19 November 2007. See the [LICENSE] file for more details.
