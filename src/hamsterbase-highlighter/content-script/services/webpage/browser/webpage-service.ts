@@ -50,6 +50,8 @@ export class WebpageService implements IWebpageService {
       await this.nativeService.setBadge("✓");
       await this.nativeService.setBadgeTextColor("white");
       await this.nativeService.setBadgeBackgroundColor("rgb(48, 204, 204)");
+    } else {
+      await this.nativeService.setBadge("");
     }
   }
 

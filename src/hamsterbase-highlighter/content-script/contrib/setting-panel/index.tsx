@@ -188,7 +188,7 @@ export const SettingPage = () => {
         title={localize("setting.auto_on_title", "Auto On")}
         subTitle={localize(
           "setting.auto_on_subtitle",
-          "Extension will automatically check the save status of each page you visit"
+          "After enabling, the extension will automatically enable the webpage annotation feature."
         )}
         option={
           <Switch {...getFormOptionProps(settings, StorageKeys.autoOn)} />
@@ -198,8 +198,8 @@ export const SettingPage = () => {
       <SettingItem
         title={localize("setting.auto_on_block_list", "Auto On Block List")}
         subTitle={localize(
-          "setting.auto_on_subtitle",
-          "Extension will automatically check the save status of each page you visit"
+          "setting.auto_on_block_list_subtitle",
+          "The webpage annotation feature will not be automatically enabled on the following webpages."
         )}
         option={null}
       />

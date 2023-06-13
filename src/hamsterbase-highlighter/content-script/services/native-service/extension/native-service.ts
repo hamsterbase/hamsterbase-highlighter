@@ -18,7 +18,7 @@ export class NativeService implements INativeService {
   private handlerMap = new Map<string, () => void>();
 
   constructor() {
-    chrome.runtime.onMessage.addListener((message) => {
+    chrome.runtime.onMessage.addListener((message, _sender, send) => {
       switch (message.type) {
         case "clickIcon": {
           this._onClickIcon.fire();
@@ -36,6 +36,7 @@ export class NativeService implements INativeService {
           break;
         }
       }
+      setTimeout(() => send({ foo: "bar" }));
       return true;
     });
   }
