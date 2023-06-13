@@ -10,6 +10,7 @@ Hamsterbase Highlighter is a versatile web highlighting software that allows use
 ## Install
 
 1. [Chrome WebStore](https://chrome.google.com/webstore/detail/hamsterbase-highlighter/mlcjehmgjhkjejbhbpfejgeeolahhnhc)
+2. [Edge WebStore](https://microsoftedge.microsoft.com/addons/detail/ckechbcmcjbpcedjcjbaickjgpfjginj)
 
 ## Install From Github
 
