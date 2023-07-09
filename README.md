@@ -1,6 +1,6 @@
 # Hamsterbase Highlighter
 
-[Submit an Issue](https://github.com/hamsterbase/hamsterbase/issues)
+[Submit an Issue](https://github.com/hamsterbase/hamsterbase/issues) | [中文反馈](https://support.qq.com/product/594778)
 
 Hamsterbase Highlighter is a versatile web highlighting software that allows users to easily highlight text on any webpage. It is perfect for anyone who needs to highlight and save important information from online articles, research papers, or any other web-based content.
 
