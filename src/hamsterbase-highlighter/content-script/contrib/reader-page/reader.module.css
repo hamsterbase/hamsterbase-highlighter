@@ -1,0 +1,17 @@
+.reader-page {
+  position: fixed;
+  z-index: 10000;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background: white;
+  display: flex;
+  justify-content: center;
+}
+
+.frame {
+  border: none;
+  width: 800px;
+  height: 100%;
+}

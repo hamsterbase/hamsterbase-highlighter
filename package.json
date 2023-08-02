@@ -23,7 +23,7 @@
     "@types/react-dom": "^18.0.11",
     "@types/semver": "^7.5.0",
     "@vitejs/plugin-react": "^4.0.0",
-    "dayjs": "^1.11.7",
+    "dayjs": "^1.11.9",
     "eslint": "^8.38.0",
     "globby": "^13.1.4",
     "minimatch": "^9.0.1",
@@ -40,5 +40,9 @@
     "typescript": "^5.0.4",
     "vite": "^4.3.2",
     "vitest": "^0.31.2"
+  },
+  "dependencies": {
+    "@hamsterbase/hast": "^0.1.0",
+    "@mozilla/readability": "^0.4.4"
   }
 }

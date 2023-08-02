@@ -17,7 +17,7 @@ export type ContextType =
   | "page_action"
   | "action";
 
-export type ContextMenu = "highlight_page" | "block_page";
+export type ContextMenu = "highlight_page" | "block_page" | "read_mode";
 
 export interface CreateContextMenusOption {
   id: ContextMenu;

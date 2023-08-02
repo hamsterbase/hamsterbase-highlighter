@@ -24,8 +24,11 @@ import "@/locales/nls";
 import { localize } from "@/locales/nls";
 import createCache from "@emotion/cache";
 import { CacheProvider } from "@emotion/react";
+import { parseElement } from "@hamsterbase/hast";
+import dayjs from "dayjs";
 import React from "react";
 import ReactDOM from "react-dom";
+import { renderToString } from "react-dom/server";
 import {
   IInstantiationService,
   InstantiationService,
@@ -37,6 +40,8 @@ import { HamsterbaseHighlighterContext } from "./context";
 import { HighlightController } from "./controller/highlight-controller";
 import { BrowserClipboardService } from "./services/clipboard/browser/clipboardService";
 import { IClipboardService } from "./services/clipboard/common/clipboardService";
+import { IReaderService } from "./services/reader-service/common/reader-service";
+import { ReaderService } from "./services/reader-service/browser/readability-service";
 
 class Main {
   async load() {
@@ -116,6 +121,19 @@ class Main {
       o.get(INativeService)
     );
     await nativeService.removeAllContextMenus();
+    await nativeService.createContextMenus(
+      {
+        id: "read_mode",
+        title: localize("extension_context_menus.readMode", "Enter Read Mode"),
+        contexts: ["page"],
+      },
+      async () => {
+        const readerService = instantiationService.invokeFunction((o) =>
+          o.get(IReaderService)
+        );
+        readerService.parse();
+      }
+    );
     if (!config.autoOn) {
       await nativeService.createContextMenus(
         {
@@ -214,6 +232,7 @@ class Main {
       IExtensionPanelService,
       new SyncDescriptor(ExtensionPanelService)
     );
+    serviceCollection.set(IReaderService, new SyncDescriptor(ReaderService));
     serviceCollection.set(IWebpageService, new SyncDescriptor(WebpageService));
     const instantiationService = new InstantiationService(
       serviceCollection,
