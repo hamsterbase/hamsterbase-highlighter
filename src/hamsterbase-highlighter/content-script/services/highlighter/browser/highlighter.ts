@@ -8,6 +8,7 @@ import {
   CreateHighlightMeta,
   HighlightEvent,
   IHighlightPainterService,
+  IResetOption,
 } from "../common/highlighter";
 import injectHighlightCss from "./highlighter.css?inline";
 import iconFont from "./icon.woff2?url";
@@ -32,12 +33,12 @@ export class HighlightPainterService
   constructor() {
     super();
 
-    const { marker, highlighter } = this.doinit();
+    const { marker, highlighter, doc } = this.doinit();
     this.highlighter = highlighter;
     this.marker = marker;
 
     this.onHighlightChange(() => {
-      this.injectStyle();
+      this.injectStyle(doc);
     });
 
     this.fontUrl = (async () =>
@@ -46,20 +47,23 @@ export class HighlightPainterService
     this.styleId = generateUuid();
   }
 
-  private doinit() {
+  private doinit(_option?: IResetOption) {
+    const option = _option ?? {
+      window,
+    };
     const marker = new Marker({
-      rootElement: document.body,
-      document: document,
+      rootElement: option.window.document.body,
+      document: option.window.document,
       charsToKeep: 32,
     });
     const highlighter = new Highlighter({
-      $root: document,
+      $root: option.window.document.body,
       wrapTag: "span",
       style: {
         className: "hamsterbase-highlight-class",
       },
       exceptSelectors: ["pre"],
-      contentWindow: window,
+      contentWindow: option.window,
     });
     highlighter.on(Highlighter.event.CLICK, (...args) => {
       const id = args[0].id;
@@ -69,11 +73,11 @@ export class HighlightPainterService
       const clientX = event.clientX;
       const clientY = event.clientY;
       const clickElement = event.target as HTMLSpanElement;
-      const pseudo = window.getComputedStyle(clickElement, ":after");
+      const pseudo = option.window.getComputedStyle(clickElement, ":after");
       let clickNote = false;
       //判断有没有伪类
       if (pseudo && pseudo.content && pseudo.content !== "none") {
-        const pseudoPlaceholder = document.createElement("span");
+        const pseudoPlaceholder = option.window.document.createElement("span");
         pseudoPlaceholder.classList.add("pseudo-placeholder");
         clickElement.classList.add("no-pseudo-content");
         clickElement.appendChild(pseudoPlaceholder);
@@ -103,8 +107,8 @@ export class HighlightPainterService
         clickNote,
       });
     });
-    this.injectStyle();
-    return { marker, highlighter };
+    this.injectStyle(option.window.document);
+    return { marker, highlighter, doc: option.window.document };
   }
 
   public highlight(
@@ -159,7 +163,7 @@ export class HighlightPainterService
     };
   }
 
-  private async injectStyle() {
+  private async injectStyle(doc: Document) {
     const fontUrl = await this.fontUrl;
     const highlights = Array.from(this.highlightMap.entries());
     const highlightsWithNote = highlights
@@ -172,7 +176,7 @@ export class HighlightPainterService
           [data-highlight-id='${p}'][data-highlight-split-type="both"],
           [data-highlight-id='${p}'][data-highlight-split-type="tail"]
           `.trim();
-        const element = document.querySelector(selector);
+        const element = doc.querySelector(selector);
         if (element) {
           return `
             [data-highlight-id='${p}'][data-highlight-split-type="both"]::after,
@@ -194,21 +198,21 @@ export class HighlightPainterService
       }
       `;
 
-    const existStyle = document.getElementById(this.styleId);
+    const existStyle = doc.getElementById(this.styleId);
     if (existStyle) {
       existStyle.textContent = styleContent;
       return;
     }
-    const styleElement = document.createElement("style");
+    const styleElement = doc.createElement("style");
     styleElement.setAttribute("id", this.styleId);
     styleElement.textContent = styleContent;
 
-    document.body.append(styleElement);
+    doc.body.append(styleElement);
   }
 
-  public reset() {
+  public reset(option?: IResetOption) {
     this.highlighter.removeAll();
-    const { marker, highlighter } = this.doinit();
+    const { marker, highlighter } = this.doinit(option);
     this.highlighter = highlighter;
     this.marker = marker;
   }

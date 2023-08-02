@@ -24,11 +24,8 @@ import "@/locales/nls";
 import { localize } from "@/locales/nls";
 import createCache from "@emotion/cache";
 import { CacheProvider } from "@emotion/react";
-import { parseElement } from "@hamsterbase/hast";
-import dayjs from "dayjs";
 import React from "react";
 import ReactDOM from "react-dom";
-import { renderToString } from "react-dom/server";
 import {
   IInstantiationService,
   InstantiationService,
@@ -40,8 +37,8 @@ import { HamsterbaseHighlighterContext } from "./context";
 import { HighlightController } from "./controller/highlight-controller";
 import { BrowserClipboardService } from "./services/clipboard/browser/clipboardService";
 import { IClipboardService } from "./services/clipboard/common/clipboardService";
-import { IReaderService } from "./services/reader-service/common/reader-service";
 import { ReaderService } from "./services/reader-service/browser/readability-service";
+import { IReaderService } from "./services/reader-service/common/reader-service";
 
 class Main {
   async load() {
@@ -79,7 +76,10 @@ class Main {
     );
     const webpageInit = await webpageService.initService();
     if (webpageInit.type === "success") {
-      instantiationService.createInstance(HighlightController).run();
+      instantiationService.createInstance(HighlightController, window).run({
+        x: 0,
+        y: 0,
+      });
     }
   }
 
@@ -89,7 +89,7 @@ class Main {
 
     const renderIn = document.createElement("div");
 
-    document.body.appendChild(HamsterbaseHighlighterRoot);
+    document.body.parentNode!.appendChild(HamsterbaseHighlighterRoot);
 
     const shadow = HamsterbaseHighlighterRoot.attachShadow({ mode: "open" });
     shadow.appendChild(renderIn);

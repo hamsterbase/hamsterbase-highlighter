@@ -42,6 +42,10 @@ export interface CreateHighlightMeta {
   originalId: string;
 }
 
+export interface IResetOption {
+  window: Window;
+}
+
 export interface IHighlightPainterService extends IDisposable {
   readonly _serviceBrand: undefined;
 
@@ -56,7 +60,7 @@ export interface IHighlightPainterService extends IDisposable {
   updateHighlightNote(localHighlightId: string, notes: string): void;
   serializeRange(range: Range): SerializedRangeWithPosition | null;
 
-  reset(): void;
+  reset(option: IResetOption): void;
 }
 
 export const IHighlightPainterService =

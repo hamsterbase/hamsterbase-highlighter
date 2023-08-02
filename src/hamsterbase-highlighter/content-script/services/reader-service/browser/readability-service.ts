@@ -1,23 +1,23 @@
-import { Emitter, Event } from "vscf/base/common/event";
-import { IReaderService } from "../common/reader-service";
 import { parseElement } from "@hamsterbase/hast";
+import { Readability, isProbablyReaderable } from "@mozilla/readability";
 import dayjs from "dayjs";
 import React from "react";
 import { renderToString } from "react-dom/server";
-import { Readability, isProbablyReaderable } from "@mozilla/readability";
+import { Emitter, Event } from "vscf/base/common/event";
+import { IReaderArticle, IReaderService } from "../common/reader-service";
 
 export class ReaderService implements IReaderService {
   readonly _serviceBrand: undefined;
 
   public get visible() {
-    return this._html !== null;
+    return this._article !== null;
   }
 
-  public get html() {
-    return this._html;
+  public get article() {
+    return this._article;
   }
 
-  private _html: string | null = null;
+  private _article: IReaderArticle | null = null;
 
   private _onStatusChange = new Emitter<void>();
   public onStatusChange: Event<void> = this._onStatusChange.event;
@@ -47,16 +47,27 @@ export class ReaderService implements IReaderService {
             title: readabilityResult.title,
             content: readabilityResult.content as Element,
           });
-          this.updateHtml(html);
+          this.updateHtml({
+            html: html,
+            style: result.articleStyle(),
+          });
         }
       }
     } else {
-      this.updateHtml(articleHtml);
+      this.updateHtml({
+        html: articleHtml,
+        style: result.articleStyle(),
+      });
     }
   }
 
-  private updateHtml(html: string) {
-    this._html = html;
+  private updateHtml(article: IReaderArticle) {
+    this._article = article;
+    this._onStatusChange.fire();
+  }
+
+  public close(): void {
+    this._article = null;
     this._onStatusChange.fire();
   }
 }

@@ -10,12 +10,18 @@ import { IWebpageService } from "../services/webpage/common/webpage-service";
 import { WebpageDetail } from "../services/webpage/common/webpage-service-backend";
 import { IExtensionPanelService } from "../services/extension-panel/common/extension-panel-service";
 
+export interface IFramePosition {
+  x: number;
+  y: number;
+}
+
 export class HighlightController extends Disposable {
   private highlightMap = new Map<string, string>();
 
   private snapshot: string | null = null;
 
   constructor(
+    private window: Window,
     @IHighlightMenuService
     private readonly HighlightMenuService: IHighlightMenuService,
     @IHighlightPainterService
@@ -43,7 +49,6 @@ export class HighlightController extends Disposable {
         }
       }
     });
-
     this.webpageService.onLoad((event) => {
       this.load(event.webpage);
     });
@@ -51,7 +56,9 @@ export class HighlightController extends Disposable {
   }
 
   private load(webpage: WebpageDetail | null) {
-    this.highlightPainterService.reset();
+    this.highlightPainterService.reset({
+      window: this.window,
+    });
     if (webpage) {
       webpage.highlights.forEach((e) => {
         this.highlightPainterService.highlight(
@@ -70,12 +77,16 @@ export class HighlightController extends Disposable {
     }
   }
 
-  public async run() {
+  public async run(option: IFramePosition) {
     this.webpageService.load();
     this._register(
-      dom.addDisposableListener(document, "mouseup", (e: MouseEvent) => {
-        this.onMouseUp(e);
-      })
+      dom.addDisposableListener(
+        this.window.document,
+        "mouseup",
+        (e: MouseEvent) => {
+          this.onMouseUp(e, option);
+        }
+      )
     );
   }
 
@@ -124,8 +135,8 @@ export class HighlightController extends Disposable {
     });
   }
 
-  private onMouseUp(e: MouseEvent) {
-    const selection = window.getSelection();
+  private onMouseUp(e: MouseEvent, position: IFramePosition) {
+    const selection = this.window.getSelection();
     if (!selection) {
       return null;
     }
@@ -154,8 +165,8 @@ export class HighlightController extends Disposable {
     const openHighlightToolbar = () => {
       this.HighlightMenuService.openHighlightToolbar(
         {
-          x: e.pageX,
-          y: e.pageY,
+          x: e.pageX + position.x,
+          y: e.pageY + position.y,
         },
         {
           highlightId: null,
