@@ -18,7 +18,7 @@ export interface IFramePosition {
 export class HighlightController extends Disposable {
   private highlightMap = new Map<string, string>();
 
-  private snapshot: string | null = null;
+  private snapshot: Promise<string | null> | null = null;
 
   constructor(
     private window: Window,
@@ -80,6 +80,11 @@ export class HighlightController extends Disposable {
   public async run(option: IFramePosition) {
     this.webpageService.load();
     this._register(
+      dom.addDisposableListener(this.window.document, "mousedown", () => {
+        this.snapshot = this.nativeService.pageCapture();
+      })
+    );
+    this._register(
       dom.addDisposableListener(
         this.window.document,
         "mouseup",
@@ -115,7 +120,7 @@ export class HighlightController extends Disposable {
         textAfter: e.range.textAfter,
         textBefore: e.range.textBefore,
       },
-      this.snapshot
+      await this.snapshot
     );
     this.highlightMap.set(e.localHighlightId, remoteId);
   }
@@ -174,8 +179,11 @@ export class HighlightController extends Disposable {
         }
       );
     };
-    this.nativeService.pageCapture().then((snapshot) => {
-      this.snapshot = snapshot;
+
+    if (!this.snapshot) {
+      this.snapshot = this.nativeService.pageCapture();
+    }
+    this.snapshot.then(() => {
       openHighlightToolbar();
     });
   }

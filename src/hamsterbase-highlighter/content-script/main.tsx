@@ -57,6 +57,7 @@ class Main {
     const config = await settingService.readConfig(defaultSettingValue);
 
     await this.registerContextMenus(instantiationService, config);
+
     await this.loadUI(instantiationService);
     const matchBlockList = ruleMatchUrl(
       parseRule(config.autoOnBlockList),
@@ -85,8 +86,10 @@ class Main {
 
   private loadUI(instantiationService: IInstantiationService) {
     const HamsterbaseHighlighterRoot = document.createElement("div");
-    HamsterbaseHighlighterRoot.setAttribute("h", "2");
-
+    HamsterbaseHighlighterRoot.setAttribute(
+      "hamsterbase-highlighter-container",
+      "true"
+    );
     const renderIn = document.createElement("div");
 
     document.body.parentNode!.appendChild(HamsterbaseHighlighterRoot);
@@ -176,7 +179,7 @@ class Main {
     }
   }
 
-  private registerIconEvent(instantiationService: IInstantiationService) {
+  private async registerIconEvent(instantiationService: IInstantiationService) {
     const nativeService = instantiationService.invokeFunction((o) =>
       o.get(INativeService)
     );
