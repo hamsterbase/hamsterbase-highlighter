@@ -2,6 +2,7 @@
   width: 100vw;
   display: flex;
   justify-content: center;
+  padding-top: 50px;
 }
 
 #article {

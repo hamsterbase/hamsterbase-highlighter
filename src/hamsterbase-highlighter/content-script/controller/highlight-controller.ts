@@ -8,7 +8,6 @@ import {
 import { INativeService } from "../services/native-service/common/native-service";
 import { IWebpageService } from "../services/webpage/common/webpage-service";
 import { WebpageDetail } from "../services/webpage/common/webpage-service-backend";
-import { IExtensionPanelService } from "../services/extension-panel/common/extension-panel-service";
 
 export interface IFramePosition {
   x: number;
@@ -28,9 +27,7 @@ export class HighlightController extends Disposable {
     private readonly highlightPainterService: IHighlightPainterService,
     @IWebpageService private readonly webpageService: IWebpageService,
     @INativeService
-    private readonly nativeService: INativeService,
-    @IExtensionPanelService
-    private readonly extensionPanelService: IExtensionPanelService
+    private readonly nativeService: INativeService
   ) {
     super();
     this.highlightPainterService.onHighlightChange((e) => {
@@ -144,9 +141,6 @@ export class HighlightController extends Disposable {
     const selection = this.window.getSelection();
     if (!selection) {
       return null;
-    }
-    if (this.extensionPanelService.visible) {
-      return;
     }
     const highlightPanelController = this.HighlightMenuService.controller;
     if (highlightPanelController) {

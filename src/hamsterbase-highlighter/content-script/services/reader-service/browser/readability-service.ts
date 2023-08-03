@@ -22,7 +22,12 @@ export class ReaderService implements IReaderService {
   private _onStatusChange = new Emitter<void>();
   public onStatusChange: Event<void> = this._onStatusChange.event;
 
-  parse(): void {
+  async open(): Promise<void> {
+    this._article = await this.doParse();
+    this._onStatusChange.fire();
+  }
+
+  doParse(): IReaderArticle {
     const result = parseElement({
       document: document.body,
       parseTime(timeString, format) {
@@ -32,7 +37,6 @@ export class ReaderService implements IReaderService {
       h: React.createElement as any,
     });
     const articleHtml = result.articleHtml();
-
     if (!articleHtml) {
       const documentClone = document.cloneNode(true) as Document;
       const readable = isProbablyReaderable(document);
@@ -47,23 +51,22 @@ export class ReaderService implements IReaderService {
             title: readabilityResult.title,
             content: readabilityResult.content as Element,
           });
-          this.updateHtml({
+          return {
             html: html,
             style: result.articleStyle(),
-          });
+          };
         }
       }
     } else {
-      this.updateHtml({
+      return {
         html: articleHtml,
         style: result.articleStyle(),
-      });
+      };
     }
-  }
-
-  private updateHtml(article: IReaderArticle) {
-    this._article = article;
-    this._onStatusChange.fire();
+    return {
+      html: "error",
+      style: "",
+    };
   }
 
   public close(): void {

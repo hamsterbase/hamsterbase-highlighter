@@ -1,21 +1,23 @@
-import { useEventRender } from "@/content-script/hooks/use-event-render";
-import { IReaderService } from "@/content-script/services/reader-service/common/reader-service";
-import React, { useEffect, useMemo, useRef } from "react";
-import { useService } from "../../hooks/use-service";
-import styles from "./reader.module.css";
-import layout from "./layout.css?inline";
-import { IWebpageService } from "@/content-script/services/webpage/common/webpage-service";
-import { IInstantiationService } from "vscf/platform/instantiation/common";
 import { HighlightController } from "@/content-script/controller/highlight-controller";
+import { useEventRender } from "@/content-script/hooks/use-event-render";
+import { IExtensionPanelService } from "@/content-script/services/extension-panel/common/extension-panel-service";
+import { IReaderService } from "@/content-script/services/reader-service/common/reader-service";
+import { IWebpageService } from "@/content-script/services/webpage/common/webpage-service";
+import React, { useEffect, useMemo, useRef } from "react";
+import { IInstantiationService } from "vscf/platform/instantiation/common";
+import { useService } from "../../hooks/use-service";
+import { ReaderHeader } from "./header";
+import layout from "./layout.css?inline";
+import styles from "./reader.module.css";
+import { ExtensionPanel } from "../extension-panel";
 
 export const Reader = () => {
   const readerService = useService(IReaderService);
   const webpageService = useService(IWebpageService);
   const instantiationService = useService(IInstantiationService);
-
   useEventRender(readerService.onStatusChange);
-  const ref = useRef<HTMLIFrameElement>(null);
 
+  const ref = useRef<HTMLIFrameElement>(null);
   const url = useMemo(() => {
     if (!readerService.article) {
       return null;
@@ -91,9 +93,8 @@ export const Reader = () => {
 
   return (
     <div className={styles.readerPage}>
-      <div className={styles.header}>
-        <button onClick={() => readerService.close()}>关闭</button>
-      </div>
+      <ReaderHeader></ReaderHeader>
+      <ExtensionPanel></ExtensionPanel>
       <iframe ref={ref} className={styles.frame} src={url}></iframe>
     </div>
   );

@@ -124,19 +124,6 @@ class Main {
       o.get(INativeService)
     );
     await nativeService.removeAllContextMenus();
-    await nativeService.createContextMenus(
-      {
-        id: "read_mode",
-        title: localize("extension_context_menus.readMode", "Enter Read Mode"),
-        contexts: ["page"],
-      },
-      async () => {
-        const readerService = instantiationService.invokeFunction((o) =>
-          o.get(IReaderService)
-        );
-        readerService.parse();
-      }
-    );
     if (!config.autoOn) {
       await nativeService.createContextMenus(
         {
@@ -180,26 +167,20 @@ class Main {
   }
 
   private async registerIconEvent(instantiationService: IInstantiationService) {
-    const nativeService = instantiationService.invokeFunction((o) =>
-      o.get(INativeService)
-    );
-    const extensionPanelService = instantiationService.invokeFunction((o) =>
-      o.get(IExtensionPanelService)
-    );
-    const webpageService = instantiationService.invokeFunction((o) =>
-      o.get(IWebpageService)
-    );
+    const { readerService, nativeService } =
+      instantiationService.invokeFunction((o) => {
+        const readerService = o.get(IReaderService);
+        const nativeService = o.get(INativeService);
+
+        return { readerService, nativeService };
+      });
 
     nativeService.onClickIcon(async () => {
-      extensionPanelService.setVisible(!extensionPanelService.visible);
-      const status = await webpageService.initService();
-      if (status.type === "success") {
-        extensionPanelService.setPanel("info");
+      if (!readerService.visible) {
+        readerService.open();
+      } else {
+        readerService.close();
       }
-    });
-
-    nativeService.onTabActivated(async () => {
-      await webpageService.refreshBadgeStatus();
     });
   }
 

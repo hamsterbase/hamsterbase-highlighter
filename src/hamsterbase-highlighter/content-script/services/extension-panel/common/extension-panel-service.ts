@@ -6,38 +6,27 @@ type ExtensionPanel = "setting" | "info";
 export interface IExtensionPanelService {
   readonly _serviceBrand: undefined;
 
-  readonly visible: boolean;
-
   onStatusChange: Event<void>;
 
-  readonly panel: ExtensionPanel;
+  readonly panel: ExtensionPanel | null;
 
   setPanel(panel: ExtensionPanel): void;
-
-  setVisible(visible: boolean): void;
 }
 
 export class ExtensionPanelService implements IExtensionPanelService {
   readonly _serviceBrand: undefined;
 
-  public visible = false;
-
   private _onStatusChange = new Emitter<void>();
   public onStatusChange: Event<void> = this._onStatusChange.event;
 
-  private _panel: ExtensionPanel = "setting";
+  private _panel: ExtensionPanel | null = null;
 
-  public get panel(): ExtensionPanel {
+  public get panel(): ExtensionPanel | null {
     return this._panel;
   }
 
-  public setPanel(panel: ExtensionPanel): void {
+  public setPanel(panel: ExtensionPanel | null): void {
     this._panel = panel;
-    this._onStatusChange.fire();
-  }
-
-  public setVisible(visible: boolean): void {
-    this.visible = visible;
     this._onStatusChange.fire();
   }
 }

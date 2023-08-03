@@ -14,7 +14,7 @@ export interface IReaderService {
 
   onStatusChange: Event<void>;
 
-  parse(): void;
+  open(): Promise<void>;
 
   close(): void;
 }
