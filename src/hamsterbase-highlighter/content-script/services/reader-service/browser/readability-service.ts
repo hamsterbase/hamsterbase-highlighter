@@ -5,6 +5,7 @@ import React from "react";
 import { renderToString } from "react-dom/server";
 import { Emitter, Event } from "vscf/base/common/event";
 import { IReaderArticle, IReaderService } from "../common/reader-service";
+import { INativeService } from "../../native-service/common/native-service";
 
 export class ReaderService implements IReaderService {
   readonly _serviceBrand: undefined;
@@ -22,12 +23,15 @@ export class ReaderService implements IReaderService {
   private _onStatusChange = new Emitter<void>();
   public onStatusChange: Event<void> = this._onStatusChange.event;
 
+  constructor(@INativeService private nativeService: INativeService) {}
+
   async open(): Promise<void> {
     this._article = await this.doParse();
     this._onStatusChange.fire();
   }
 
-  doParse(): IReaderArticle {
+  async doParse(): Promise<IReaderArticle> {
+    const snapshot = this.nativeService.pageCapture();
     const result = parseElement({
       document: document.body,
       parseTime(timeString, format) {
@@ -54,6 +58,7 @@ export class ReaderService implements IReaderService {
           return {
             html: html,
             style: result.articleStyle(),
+            snapshot: await snapshot,
           };
         }
       }
@@ -61,10 +66,12 @@ export class ReaderService implements IReaderService {
       return {
         html: articleHtml,
         style: result.articleStyle(),
+        snapshot: await snapshot,
       };
     }
     return {
       html: "error",
+      snapshot: await snapshot,
       style: "",
     };
   }

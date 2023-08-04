@@ -38,7 +38,7 @@ export interface INativeService {
 
   reloadExtension(): Promise<void>;
 
-  pageCapture(): Promise<string | null>;
+  pageCapture(): Promise<string>;
 
   createContextMenus(
     option: CreateContextMenusOption,

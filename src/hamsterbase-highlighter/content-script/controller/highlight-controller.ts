@@ -21,6 +21,7 @@ export class HighlightController extends Disposable {
 
   constructor(
     private window: Window,
+    private internalSnapshot: string | null,
     @IHighlightMenuService
     private readonly HighlightMenuService: IHighlightMenuService,
     @IHighlightPainterService
@@ -30,26 +31,41 @@ export class HighlightController extends Disposable {
     private readonly nativeService: INativeService
   ) {
     super();
-    this.highlightPainterService.onHighlightChange((e) => {
-      switch (e.type) {
-        case "click": {
-          return this.handleClick(e);
+    this._register(
+      this.highlightPainterService.onHighlightChange((e) => {
+        switch (e.type) {
+          case "click": {
+            return this.handleClick(e);
+          }
+          case "create": {
+            return this.handleCreateWebpage(e);
+          }
+          case "remove": {
+            return this.handleRemoveWebpage(e);
+          }
+          case "update": {
+            return this.handleUpdateNote(e);
+          }
         }
-        case "create": {
-          return this.handleCreateWebpage(e);
-        }
-        case "remove": {
-          return this.handleRemoveWebpage(e);
-        }
-        case "update": {
-          return this.handleUpdateNote(e);
-        }
-      }
-    });
-    this.webpageService.onLoad((event) => {
-      this.load(event.webpage);
-    });
+      })
+    );
+    this._register(
+      this.webpageService.onLoad((event) => {
+        this.load(event.webpage);
+      })
+    );
     this.load(webpageService.currentWebpage);
+  }
+
+  private async getSnapshot(): Promise<string> {
+    if (this.internalSnapshot) {
+      return this.internalSnapshot;
+    }
+    if (this.snapshot) {
+      this.snapshot = this.nativeService.pageCapture();
+    }
+    // TODO: fix this
+    return this.snapshot as Promise<string>;
   }
 
   private load(webpage: WebpageDetail | null) {
@@ -75,7 +91,9 @@ export class HighlightController extends Disposable {
   }
 
   public async run(option: IFramePosition) {
-    this.webpageService.load();
+    this.webpageService.initService().then(() => {
+      this.webpageService.load();
+    });
     this._register(
       dom.addDisposableListener(this.window.document, "mousedown", () => {
         this.snapshot = this.nativeService.pageCapture();
@@ -164,8 +182,8 @@ export class HighlightController extends Disposable {
     const openHighlightToolbar = () => {
       this.HighlightMenuService.openHighlightToolbar(
         {
-          x: e.pageX + position.x,
-          y: e.pageY + position.y,
+          x: e.clientY + position.x,
+          y: e.clientY + position.y,
         },
         {
           highlightId: null,
@@ -177,7 +195,7 @@ export class HighlightController extends Disposable {
     if (!this.snapshot) {
       this.snapshot = this.nativeService.pageCapture();
     }
-    this.snapshot.then(() => {
+    this.getSnapshot().then(() => {
       openHighlightToolbar();
     });
   }

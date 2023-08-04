@@ -7,7 +7,7 @@
   --gray: #a8a8a8;
   --danger: #d0021b;
 
-  position: absolute;
+  position: fixed;
   box-shadow: rgb(0 0 0 / 10%) 0 0 12px;
   z-index: 10000;
   border: 1px solid var(--light-gray);

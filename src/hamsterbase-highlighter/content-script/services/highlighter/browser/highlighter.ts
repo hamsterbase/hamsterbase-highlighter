@@ -101,8 +101,8 @@ export class HighlightPainterService
         localHighlightId: id,
         range: this.highlightMap.get(id)!,
         position: {
-          x: event.pageX,
-          y: event.pageY,
+          x: event.clientX,
+          y: event.clientY,
         },
         clickNote,
       });

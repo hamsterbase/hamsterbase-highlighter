@@ -4,6 +4,7 @@ import { createDecorator } from "vscf/platform/instantiation/common";
 export interface IReaderArticle {
   html: string;
   style: string;
+  snapshot: string | null;
 }
 export interface IReaderService {
   readonly _serviceBrand: undefined;

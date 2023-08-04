@@ -39,6 +39,10 @@ import { BrowserClipboardService } from "./services/clipboard/browser/clipboardS
 import { IClipboardService } from "./services/clipboard/common/clipboardService";
 import { ReaderService } from "./services/reader-service/browser/readability-service";
 import { IReaderService } from "./services/reader-service/common/reader-service";
+import {
+  HighlightControllerManagerService,
+  IHighlightControllerManagerService,
+} from "./services/highlighter/common/controller-manager";
 
 class Main {
   async load() {
@@ -72,16 +76,11 @@ class Main {
   private async loadWebpageAndHighlightMenu(
     instantiationService: IInstantiationService
   ) {
-    const webpageService = instantiationService.invokeFunction((o) =>
-      o.get(IWebpageService)
-    );
-    const webpageInit = await webpageService.initService();
-    if (webpageInit.type === "success") {
-      instantiationService.createInstance(HighlightController, window).run({
-        x: 0,
-        y: 0,
-      });
-    }
+    const highlightControllerManagerService =
+      instantiationService.invokeFunction((o) =>
+        o.get(IHighlightControllerManagerService)
+      );
+    highlightControllerManagerService.enter();
   }
 
   private loadUI(instantiationService: IInstantiationService) {
@@ -211,6 +210,10 @@ class Main {
     serviceCollection.set(
       IHighlightPainterService,
       new SyncDescriptor(HighlightPainterService)
+    );
+    serviceCollection.set(
+      IHighlightControllerManagerService,
+      new SyncDescriptor(HighlightControllerManagerService)
     );
     serviceCollection.set(
       IExtensionPanelService,

@@ -1,20 +1,18 @@
-import { HighlightController } from "@/content-script/controller/highlight-controller";
 import { useEventRender } from "@/content-script/hooks/use-event-render";
-import { IExtensionPanelService } from "@/content-script/services/extension-panel/common/extension-panel-service";
+import { IHighlightControllerManagerService } from "@/content-script/services/highlighter/common/controller-manager";
 import { IReaderService } from "@/content-script/services/reader-service/common/reader-service";
-import { IWebpageService } from "@/content-script/services/webpage/common/webpage-service";
 import React, { useEffect, useMemo, useRef } from "react";
-import { IInstantiationService } from "vscf/platform/instantiation/common";
 import { useService } from "../../hooks/use-service";
+import { ExtensionPanel } from "../extension-panel";
 import { ReaderHeader } from "./header";
 import layout from "./layout.css?inline";
 import styles from "./reader.module.css";
-import { ExtensionPanel } from "../extension-panel";
 
 export const Reader = () => {
   const readerService = useService(IReaderService);
-  const webpageService = useService(IWebpageService);
-  const instantiationService = useService(IInstantiationService);
+  const highlightControllerManagerService = useService(
+    IHighlightControllerManagerService
+  );
   useEventRender(readerService.onStatusChange);
 
   const ref = useRef<HTMLIFrameElement>(null);
@@ -70,19 +68,14 @@ export const Reader = () => {
       if (!iframe.contentWindow) {
         return;
       }
-      await webpageService.initService();
-      const highlightController = instantiationService.createInstance(
-        HighlightController,
-        iframe.contentWindow
+      highlightControllerManagerService.enterReader(
+        iframe,
+        readerService.article?.snapshot!
       );
-      const rect = iframe.getBoundingClientRect();
-      highlightController.run({
-        x: rect.x,
-        y: rect.y,
-      });
     };
     iframe.addEventListener("load", handler);
     return () => {
+      highlightControllerManagerService.exitReader();
       iframe.removeEventListener("load", handler);
     };
   }, [url]);

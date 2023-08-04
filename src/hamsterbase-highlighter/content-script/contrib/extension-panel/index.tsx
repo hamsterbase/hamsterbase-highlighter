@@ -3,7 +3,6 @@ import { useEventRender } from "../../hooks/use-event-render";
 import { useService } from "../../hooks/use-service";
 import { IExtensionPanelService } from "../../services/extension-panel/common/extension-panel-service";
 import { SettingPage } from "../setting-panel";
-import { Webpage } from "../webpage-panel";
 import styles from "./index.module.css";
 
 export const ExtensionPanel: React.FC = () => {
@@ -15,11 +14,6 @@ export const ExtensionPanel: React.FC = () => {
       {extensionPanelService.panel === "setting" && (
         <div className={styles.extensionPanelContainer}>
           <SettingPage></SettingPage>
-        </div>
-      )}
-      {extensionPanelService.panel === "info" && (
-        <div className={styles.extensionPanelContainer}>
-          <Webpage></Webpage>
         </div>
       )}
     </div>
