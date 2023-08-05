@@ -34,15 +34,14 @@ import {
 } from "vscf/platform/instantiation/common";
 import { App } from "./app";
 import { HamsterbaseHighlighterContext } from "./context";
-import { HighlightController } from "./controller/highlight-controller";
 import { BrowserClipboardService } from "./services/clipboard/browser/clipboardService";
 import { IClipboardService } from "./services/clipboard/common/clipboardService";
-import { ReaderService } from "./services/reader-service/browser/readability-service";
-import { IReaderService } from "./services/reader-service/common/reader-service";
 import {
   HighlightControllerManagerService,
   IHighlightControllerManagerService,
 } from "./services/highlighter/common/controller-manager";
+import { ReaderService } from "./services/reader-service/browser/readability-service";
+import { IReaderService } from "./services/reader-service/common/reader-service";
 
 class Main {
   async load() {

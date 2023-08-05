@@ -5,7 +5,7 @@
   "error.unsupportedService": "不支持的服务: {0}",
   "extension_context_menus.block_highlightPage": "把当前 URL 添加到自动开启黑名单",
   "extension_context_menus.highlightPage": "高亮页面",
-  "hamsterbase.endpoint": "请输入 HamsterBase 入口点",
+  "hamsterbase.endpoint": "请输入 HamsterBase Entrypoint",
   "hamsterbase.token": "请输入 HamsterBase 令牌",
   "hamsterbase.version": "HamsterBase 版本必须为 0.7.1 或更高",
   "highlight_tool.add_highlight": "添加高亮",

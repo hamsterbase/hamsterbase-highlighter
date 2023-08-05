@@ -6,6 +6,7 @@ import { renderToString } from "react-dom/server";
 import { Emitter, Event } from "vscf/base/common/event";
 import { IReaderArticle, IReaderService } from "../common/reader-service";
 import { INativeService } from "../../native-service/common/native-service";
+import { IHighlightMenuService } from "../../highlighter-menu/common/highlighter-menu-service";
 
 export class ReaderService implements IReaderService {
   readonly _serviceBrand: undefined;
@@ -23,9 +24,15 @@ export class ReaderService implements IReaderService {
   private _onStatusChange = new Emitter<void>();
   public onStatusChange: Event<void> = this._onStatusChange.event;
 
-  constructor(@INativeService private nativeService: INativeService) {}
+  constructor(
+    @INativeService private nativeService: INativeService,
+    @IHighlightMenuService private highlightMenuService: IHighlightMenuService
+  ) {}
 
   async open(): Promise<void> {
+    if (this.highlightMenuService.controller) {
+      this.highlightMenuService.controller.dispose();
+    }
     this._article = await this.doParse();
     this._onStatusChange.fire();
   }

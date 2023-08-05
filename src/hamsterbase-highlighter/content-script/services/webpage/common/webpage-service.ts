@@ -1,10 +1,5 @@
-import { Event } from "vscf/base/common/event";
-import {
-  AddHighlightOption,
-  IClipWebpageOption,
-  WebpageDetail,
-} from "./webpage-service-backend";
 import { createDecorator } from "vscf/platform/instantiation/common";
+import { AddHighlightOption, WebpageDetail } from "./webpage-service-backend";
 
 export type WebpageBackendStatus =
   | {
@@ -15,31 +10,22 @@ export type WebpageBackendStatus =
       message: string;
     };
 
+export interface WebpageLoadEvent {
+  webpage: WebpageDetail | null;
+}
+
 export interface IWebpageService {
   _serviceBrand: undefined;
 
-  currentWebpage: WebpageDetail | null;
+  serviceStatus(): Promise<WebpageBackendStatus>;
 
-  onLoad: Event<{ webpage: WebpageDetail | null }>;
+  load(): Promise<null | WebpageDetail>;
 
-  onStatusChange: Event<void>;
-
-  saveWebpage(webpage: IClipWebpageOption): Promise<WebpageDetail>;
-
-  initService(): Promise<WebpageBackendStatus>;
-
-  refreshBadgeStatus(): Promise<void>;
-
-  addHighlight(
-    option: AddHighlightOption,
-    snapshot?: string | null
-  ): Promise<string>;
+  addHighlight(option: AddHighlightOption, snapshot: string): Promise<string>;
 
   updateHighlightNote(id: string, note: string): Promise<void>;
 
   deleteHighlight(id: string): Promise<void>;
-
-  load(): Promise<void>;
 }
 
 export const IWebpageService =

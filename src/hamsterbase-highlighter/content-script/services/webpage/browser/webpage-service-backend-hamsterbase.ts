@@ -102,7 +102,7 @@ export class HamsterBaseHighlightService implements IHighlightService {
     if (!this.endpoint) {
       return {
         type: "error",
-        message: localize("hamsterbase.endpoint", "Please input endpoint"),
+        message: localize("hamsterbase.endpoint", "Please input entrypoint"),
       };
     }
     if (!this.token) {

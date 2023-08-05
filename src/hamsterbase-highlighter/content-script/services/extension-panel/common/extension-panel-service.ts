@@ -10,7 +10,7 @@ export interface IExtensionPanelService {
 
   readonly panel: ExtensionPanel | null;
 
-  setPanel(panel: ExtensionPanel): void;
+  togglePanel(panel: ExtensionPanel): void;
 }
 
 export class ExtensionPanelService implements IExtensionPanelService {
@@ -25,8 +25,12 @@ export class ExtensionPanelService implements IExtensionPanelService {
     return this._panel;
   }
 
-  public setPanel(panel: ExtensionPanel | null): void {
-    this._panel = panel;
+  public togglePanel(panel: ExtensionPanel | null): void {
+    if (this._panel === panel) {
+      this._panel = null;
+    } else {
+      this._panel = panel;
+    }
     this._onStatusChange.fire();
   }
 }

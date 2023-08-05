@@ -1,15 +1,22 @@
 import { IClipboardService } from "@/content-script/services/clipboard/common/clipboardService";
+import {
+  IWebpageService,
+  WebpageBackendStatus,
+} from "@/content-script/services/webpage/common/webpage-service";
 import { localize } from "@/locales/nls";
 import CopyOne from "@icon-park/react/es/icons/CopyOne";
 import HighLight from "@icon-park/react/es/icons/HighLight";
 import Minus from "@icon-park/react/es/icons/Minus";
 import Notes from "@icon-park/react/es/icons/Notes";
 import RCTextArea from "rc-textarea";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { IHighlightMenuService } from "../../services/highlighter-menu/common/highlighter-menu-service";
 import { useEventRender } from "./../../hooks/use-event-render";
 import { useService } from "./../../hooks/use-service";
 import styles from "./tool.module.css";
+import { ReaderService } from "@/content-script/services/reader-service/browser/readability-service";
+import { IReaderService } from "@/content-script/services/reader-service/common/reader-service";
+import { IExtensionPanelService } from "@/content-script/services/extension-panel/common/extension-panel-service";
 
 interface HighLightAction {
   key: string;
@@ -90,16 +97,72 @@ export const TakeNote: React.FC<{
 export const HighlightTool = () => {
   const HighlightMenuService = useService(IHighlightMenuService);
   const clipboardService = useService(IClipboardService);
+  const webpageService = useService(IWebpageService);
+  const readerService = useService(IReaderService);
+  const extensionPanelService = useService(IExtensionPanelService);
+
   useEventRender(HighlightMenuService.onControllerChange);
   useEventRender(HighlightMenuService.controller?.onStatusChange);
 
+  const [webpageBackendStatus, setWebpageBackendStatus] =
+    useState<WebpageBackendStatus | null>(null);
+
   const controller = HighlightMenuService.controller;
+
+  useEffect(() => {
+    webpageService.serviceStatus().then((res) => {
+      setWebpageBackendStatus(res);
+    });
+  }, [controller]);
+
   if (!controller) {
     return <div></div>;
   }
-
   const state = controller.state;
   const actions = createActions(!!state.option.highlightId, false);
+
+  if (webpageBackendStatus === null) {
+    return (
+      <div
+        className={styles.highlighterToolContainer}
+        style={{
+          top: state.position.y + 10,
+          left: state.position.x + 10,
+          padding: 9,
+        }}
+      >
+        Loading
+      </div>
+    );
+  }
+  if (webpageBackendStatus.type === "error") {
+    console.log(11);
+    return (
+      <div
+        className={styles.highlighterToolContainer}
+        style={{
+          top: state.position.y + 10,
+          left: state.position.x + 10,
+          padding: 9,
+        }}
+        onMouseUp={(e) => {
+          e.stopPropagation();
+        }}
+        onClick={(e) => {
+          console.log(e);
+          if (!readerService.visible) {
+            readerService.open();
+          }
+          if (extensionPanelService.panel !== "setting") {
+            extensionPanelService.togglePanel("setting");
+          }
+        }}
+      >
+        <div>Some Error</div>
+        <div>{webpageBackendStatus.message}</div>
+      </div>
+    );
+  }
 
   return (
     <div

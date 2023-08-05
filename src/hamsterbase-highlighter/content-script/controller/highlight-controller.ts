@@ -49,12 +49,6 @@ export class HighlightController extends Disposable {
         }
       })
     );
-    this._register(
-      this.webpageService.onLoad((event) => {
-        this.load(event.webpage);
-      })
-    );
-    this.load(webpageService.currentWebpage);
   }
 
   private async getSnapshot(): Promise<string> {
@@ -91,9 +85,7 @@ export class HighlightController extends Disposable {
   }
 
   public async run(option: IFramePosition) {
-    this.webpageService.initService().then(() => {
-      this.webpageService.load();
-    });
+    this.webpageService.load().then((webpage) => this.load(webpage));
     this._register(
       dom.addDisposableListener(this.window.document, "mousedown", () => {
         this.snapshot = this.nativeService.pageCapture();
@@ -135,7 +127,7 @@ export class HighlightController extends Disposable {
         textAfter: e.range.textAfter,
         textBefore: e.range.textBefore,
       },
-      await this.snapshot
+      await this.getSnapshot()
     );
     this.highlightMap.set(e.localHighlightId, remoteId);
   }

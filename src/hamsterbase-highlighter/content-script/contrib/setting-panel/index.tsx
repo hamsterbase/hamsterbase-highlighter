@@ -59,7 +59,7 @@ export const SettingPage = () => {
   }, []);
 
   useEffect(() => {
-    webpageService.initService().then((re) => {
+    webpageService.serviceStatus().then((re) => {
       setBackendService(re);
     });
   }, [settings]);

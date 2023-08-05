@@ -27,7 +27,7 @@ export const ReaderHeader = () => {
       <div style={{ display: "flex" }}>
         <Icon
           active={extensionPanelService.panel === "setting"}
-          onClick={() => extensionPanelService.setPanel("setting")}
+          onClick={() => extensionPanelService.togglePanel("setting")}
           renderIcon={(size) => {
             return <Setting size={size}></Setting>;
           }}
