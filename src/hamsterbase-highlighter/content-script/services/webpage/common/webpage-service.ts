@@ -17,6 +17,8 @@ export interface WebpageLoadEvent {
 export interface IWebpageService {
   _serviceBrand: undefined;
 
+  saveSnapshot(snapshot: string): Promise<boolean>;
+
   serviceStatus(): Promise<WebpageBackendStatus>;
 
   load(): Promise<null | WebpageDetail>;

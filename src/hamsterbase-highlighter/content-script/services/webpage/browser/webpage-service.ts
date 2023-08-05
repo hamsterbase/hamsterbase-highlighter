@@ -118,6 +118,15 @@ export class WebpageService implements IWebpageService {
     }
   }
 
+  public async saveSnapshot(snapshot: string) {
+    try {
+      const res = await this.ensureWebpage(snapshot);
+      return !!res.webpage.id;
+    } catch (error) {
+      return false;
+    }
+  }
+
   private async createHighlightService(): Promise<IHighlightService> {
     const config = await this.settingService.readConfig(defaultSettingValue);
     switch (config.backend) {

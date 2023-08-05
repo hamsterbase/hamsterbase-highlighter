@@ -121,14 +121,41 @@ class Main {
     const nativeService = instantiationService.invokeFunction((o) =>
       o.get(INativeService)
     );
+    const webpageService = instantiationService.invokeFunction((o) =>
+      o.get(IWebpageService)
+    );
     await nativeService.removeAllContextMenus();
+
+    webpageService.serviceStatus().then(async (status) => {
+      if (status.type === "success") {
+        await nativeService.createContextMenus(
+          {
+            id: "read_it_later",
+            title: localize(
+              "extension_context_menus.readItLater",
+              "Add to read later, and close the page."
+            ),
+            contexts: ["page"],
+          },
+          async () => {
+            const res = await webpageService.saveSnapshot(
+              await nativeService.pageCapture()
+            );
+            if (res) {
+              await nativeService.closeCurrentPage();
+            }
+          }
+        );
+      }
+    });
+
     if (!config.autoOn) {
       await nativeService.createContextMenus(
         {
-          id: "highlight_page",
+          id: "start_annotating",
           title: localize(
             "extension_context_menus.highlightPage",
-            "Highlight Page"
+            "Start annotating."
           ),
           contexts: ["page"],
         },

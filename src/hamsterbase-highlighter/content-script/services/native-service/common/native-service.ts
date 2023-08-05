@@ -17,7 +17,7 @@ export type ContextType =
   | "page_action"
   | "action";
 
-export type ContextMenu = "highlight_page" | "block_page" | "read_mode";
+export type ContextMenu = "start_annotating" | "block_page" | "read_it_later";
 
 export interface CreateContextMenusOption {
   id: ContextMenu;
@@ -39,6 +39,8 @@ export interface INativeService {
   reloadExtension(): Promise<void>;
 
   pageCapture(): Promise<string>;
+
+  closeCurrentPage(): Promise<void>;
 
   createContextMenus(
     option: CreateContextMenusOption,

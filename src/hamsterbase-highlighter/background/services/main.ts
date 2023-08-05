@@ -6,3 +6,4 @@ export { createContextMenus } from "./create-context-menus";
 export { removeAllContextMenus } from "./remove-all-context-menus";
 export { workerRequest } from "./worker-request";
 export { setBadgeTextColor } from "./set-badge-text-color";
+export { closeCurrentPage } from "./close-current-page";

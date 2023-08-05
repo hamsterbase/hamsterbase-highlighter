@@ -53,8 +53,12 @@ export class NativeService implements INativeService {
     return services.reloadExtension();
   }
 
-  public pageCapture(): Promise<string | null> {
-    return services.pageCapture();
+  public pageCapture(): Promise<string> {
+    return services.pageCapture() as unknown as Promise<string>;
+  }
+
+  public closeCurrentPage(): Promise<void> {
+    return services.closeCurrentPage();
   }
 
   public createContextMenus(
