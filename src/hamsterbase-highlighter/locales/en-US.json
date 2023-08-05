@@ -5,7 +5,7 @@
   "error.unsupportedService": "Unsupported service: {0}",
   "extension_context_menus.block_highlightPage": "Block This Page",
   "extension_context_menus.highlightPage": "Highlight Page",
-  "hamsterbase.endpoint": "Please input endpoint",
+  "hamsterbase.endpoint": "Please input entrypoint",
   "hamsterbase.token": "Please input token",
   "hamsterbase.version": "HamsterBase must be version 0.7.1 or higher",
   "highlight_tool.add_highlight": "Add highlight",
@@ -15,7 +15,8 @@
   "highlight_tool.edit_note": "Edit note",
   "highlight_tool.save": "Save",
   "highlight_tool.take_note": "Take note",
-  "service not ready": "Backend service not ready",
+  "init.error": "Unable to connect to server.",
+  "lang": "en-US",
   "setting.account_title": "Backend Service",
   "setting.account.subtitle": "Please select the service for saving.",
   "setting.auto_on_block_list": "Auto On Block List",
@@ -26,6 +27,5 @@
   "setting.hamsterbase_token": "HamsterBase Token",
   "setting.notion_database_id": "Notion Database id",
   "setting.notion_license_checkbox": "Allow the extension to access and modify the database.",
-  "setting.notion_token": "Notion Token",
-  "webpage_empty": "Webpage is not saved"
+  "setting.notion_token": "Notion Token"
 }

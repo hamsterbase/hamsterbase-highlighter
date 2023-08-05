@@ -7,6 +7,9 @@ import { Emitter, Event } from "vscf/base/common/event";
 import { IReaderArticle, IReaderService } from "../common/reader-service";
 import { INativeService } from "../../native-service/common/native-service";
 import { IHighlightMenuService } from "../../highlighter-menu/common/highlighter-menu-service";
+import errorHtml from "./error.html?raw";
+import errorHtmlZh from "./error-zh.html?raw";
+import { localize } from "@/locales/nls";
 
 export class ReaderService implements IReaderService {
   readonly _serviceBrand: undefined;
@@ -77,7 +80,12 @@ export class ReaderService implements IReaderService {
       };
     }
     return {
-      html: "error",
+      error: true,
+      html:
+        {
+          "en-US": errorHtml,
+          ["zh-CN"]: errorHtmlZh,
+        }[localize("lang", "en-US")] ?? errorHtml,
       snapshot: await snapshot,
       style: "",
     };

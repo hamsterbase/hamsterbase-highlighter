@@ -7,12 +7,15 @@ import { ExtensionPanel } from "../extension-panel";
 import { ReaderHeader } from "./header";
 import layout from "./layout.css?inline";
 import styles from "./reader.module.css";
+import { IExtensionPanelService } from "@/content-script/services/extension-panel/common/extension-panel-service";
 
 export const Reader = () => {
   const readerService = useService(IReaderService);
   const highlightControllerManagerService = useService(
     IHighlightControllerManagerService
   );
+  const extensionPanelService = useService(IExtensionPanelService);
+  useEventRender(extensionPanelService.onStatusChange);
   useEventRender(readerService.onStatusChange);
 
   const ref = useRef<HTMLIFrameElement>(null);
@@ -68,10 +71,14 @@ export const Reader = () => {
       if (!iframe.contentWindow) {
         return;
       }
-      highlightControllerManagerService.enterReader(
-        iframe,
-        readerService.article?.snapshot!
-      );
+      if (readerService.article) {
+        if (!readerService.article.error) {
+          highlightControllerManagerService.enterReader(
+            iframe,
+            readerService.article?.snapshot!
+          );
+        }
+      }
     };
     iframe.addEventListener("load", handler);
     return () => {

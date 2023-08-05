@@ -1,4 +1,6 @@
 import { IClipboardService } from "@/content-script/services/clipboard/common/clipboardService";
+import { IExtensionPanelService } from "@/content-script/services/extension-panel/common/extension-panel-service";
+import { IReaderService } from "@/content-script/services/reader-service/common/reader-service";
 import {
   IWebpageService,
   WebpageBackendStatus,
@@ -14,9 +16,6 @@ import { IHighlightMenuService } from "../../services/highlighter-menu/common/hi
 import { useEventRender } from "./../../hooks/use-event-render";
 import { useService } from "./../../hooks/use-service";
 import styles from "./tool.module.css";
-import { ReaderService } from "@/content-script/services/reader-service/browser/readability-service";
-import { IReaderService } from "@/content-script/services/reader-service/common/reader-service";
-import { IExtensionPanelService } from "@/content-script/services/extension-panel/common/extension-panel-service";
 
 interface HighLightAction {
   key: string;
@@ -158,7 +157,7 @@ export const HighlightTool = () => {
           }
         }}
       >
-        <div>Some Error</div>
+        <div>{localize("init.error", "Unable to connect to server.")}</div>
         <div>{webpageBackendStatus.message}</div>
       </div>
     );

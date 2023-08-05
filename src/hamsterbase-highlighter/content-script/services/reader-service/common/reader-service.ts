@@ -5,6 +5,7 @@ export interface IReaderArticle {
   html: string;
   style: string;
   snapshot: string | null;
+  error?: boolean;
 }
 export interface IReaderService {
   readonly _serviceBrand: undefined;
