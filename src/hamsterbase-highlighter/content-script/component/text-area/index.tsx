@@ -1,5 +1,4 @@
-import React from "react";
-import RCTextArea from "rc-textarea";
+import React, { useRef } from "react";
 import styles from "./index.module.css";
 
 interface TextAreaProps {
@@ -7,15 +6,17 @@ interface TextAreaProps {
   onChange: (value: string) => void;
 }
 
-export const TextArea: React.FC<TextAreaProps> = (props) => {
+export const RTextArea: React.FC<TextAreaProps> = (props) => {
+  const ref = useRef<HTMLTextAreaElement>(null);
   return (
-    <RCTextArea
+    <textarea
+      ref={ref}
       className={styles.textArea}
-      autoSize
+      style={{ height: 100 }}
       value={props.value}
       onChange={(v) => {
         props.onChange(v.target.value);
       }}
-    ></RCTextArea>
+    />
   );
 };

@@ -2,7 +2,7 @@ import fail from "@/assets/fail.svg?url";
 import success from "@/assets/success.svg?url";
 import { CheckBox } from "@/content-script/component/checkbox";
 import { Space } from "@/content-script/component/space";
-import { TextArea } from "@/content-script/component/text-area";
+import { RTextArea } from "@/content-script/component/text-area";
 import { localize } from "@/locales/nls";
 import React, { useEffect, useState } from "react";
 import { FormItem } from "../../component/form-item/form-item";
@@ -204,7 +204,7 @@ export const SettingPage = () => {
         option={null}
       />
       <Space height={13}></Space>
-      <TextArea
+      <RTextArea
         {...getFormOptionProps<string>(settings, StorageKeys.autoOnBlockList)}
       />
     </div>
