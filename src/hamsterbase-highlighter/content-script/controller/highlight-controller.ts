@@ -182,7 +182,7 @@ export class HighlightController extends Disposable {
     const openHighlightToolbar = () => {
       this.HighlightMenuService.openHighlightToolbar(
         {
-          x: e.clientY + position.x,
+          x: e.clientX + position.x,
           y: e.clientY + position.y,
         },
         {

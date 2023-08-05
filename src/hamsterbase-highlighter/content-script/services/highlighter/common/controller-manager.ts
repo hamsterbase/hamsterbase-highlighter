@@ -53,7 +53,7 @@ export class HighlightControllerManagerService
     const { x, y } = element.getBoundingClientRect();
     const frame = this.instantiationService.createInstance(
       HighlightController,
-      window,
+      element.contentWindow!,
       snapshot
     );
     frame.run({
