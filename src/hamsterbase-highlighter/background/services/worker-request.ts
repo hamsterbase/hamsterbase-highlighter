@@ -7,9 +7,7 @@ export const workerRequest = registrationService(
     url: string,
     option: HamsterBaseRequestLibOption
   ) => {
-    console.log(url, option);
     const result = await HamsterBase.fetchToRequestLib(fetch)(url, option);
-    console.log(result);
     return result;
   },
   "workerRequest"

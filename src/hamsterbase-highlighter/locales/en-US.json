@@ -28,5 +28,7 @@
   "setting.hamsterbase_token": "HamsterBase Token",
   "setting.notion_database_id": "Notion Database id",
   "setting.notion_license_checkbox": "Allow the extension to access and modify the database.",
-  "setting.notion_token": "Notion Token"
+  "setting.notion_token": "Notion Token",
+  "setting.save_status": "Save Status",
+  "setting.save_status_subtitle": "Mark on the icon whether the webpage has been saved before."
 }

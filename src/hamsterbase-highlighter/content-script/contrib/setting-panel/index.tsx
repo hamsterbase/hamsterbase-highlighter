@@ -196,6 +196,17 @@ export const SettingPage = () => {
       />
       <Space></Space>
       <SettingItem
+        title={localize("setting.save_status", "Save Status")}
+        subTitle={localize(
+          "setting.save_status_subtitle",
+          "Mark on the icon whether the webpage has been saved before."
+        )}
+        option={
+          <Switch {...getFormOptionProps(settings, StorageKeys.saveStatus)} />
+        }
+      />
+      <Space></Space>
+      <SettingItem
         title={localize("setting.auto_on_block_list", "Auto On Block List")}
         subTitle={localize(
           "setting.auto_on_block_list_subtitle",

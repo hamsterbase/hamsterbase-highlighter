@@ -10,6 +10,7 @@ export enum StorageKeys {
   "backend.notion.databaseId" = "backend.notion.databaseId",
   "backend.notion.license" = "backend.notion.license",
   autoOn = "autoOn",
+  saveStatus = "saveStatus",
   autoOnBlockList = "autoOnBlockList",
 }
 
@@ -21,6 +22,7 @@ export const defaultSettingValue = {
   [StorageKeys["backend.notion.databaseId"]]: "",
   [StorageKeys["backend.notion.license"]]: false,
   [StorageKeys.autoOn]: false,
+  [StorageKeys.saveStatus]: false,
   [StorageKeys.autoOnBlockList]: "",
 };
 

@@ -28,5 +28,7 @@
   "setting.hamsterbase_token": "HamsterBase 密钥",
   "setting.notion_database_id": "Notion 数据库 ID",
   "setting.notion_license_checkbox": "允许扩展访问和修改数据库。",
-  "setting.notion_token": "Notion 令牌"
+  "setting.notion_token": "Notion 令牌",
+  "setting.save_status": "保存状态",
+  "setting.save_status_subtitle": "在图标上标记是否之前已保存过这个网页。"
 }

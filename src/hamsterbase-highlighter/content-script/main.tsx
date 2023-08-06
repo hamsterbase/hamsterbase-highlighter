@@ -52,7 +52,6 @@ class Main {
     }
 
     this.registerIconEvent(instantiationService);
-
     const settingService = instantiationService.invokeFunction((o) =>
       o.get(ISettingService)
     );
@@ -62,10 +61,14 @@ class Main {
     await this.registerContextMenus(instantiationService, config);
 
     await this.loadUI(instantiationService);
+
     const matchBlockList = ruleMatchUrl(
       parseRule(config.autoOnBlockList),
       window.location.href
     );
+    if (config.saveStatus) {
+      this.registerIconStatus(instantiationService);
+    }
     if (!config.autoOn || matchBlockList) {
       return;
     }
@@ -206,6 +209,32 @@ class Main {
       } else {
         readerService.close();
       }
+    });
+  }
+
+  private registerIconStatus(instantiationService: IInstantiationService) {
+    const { webpageService, nativeService } =
+      instantiationService.invokeFunction((o) => {
+        const nativeService = o.get(INativeService);
+        const webpageService = o.get(IWebpageService);
+
+        return { nativeService, webpageService };
+      });
+    webpageService.load().then(async (re) => {
+      if (re) {
+        await nativeService.setBadge("✓");
+        await nativeService.setBadgeTextColor("white");
+        await nativeService.setBadgeBackgroundColor("rgb(48, 204, 204)");
+      }
+    });
+    nativeService.onTabActivated(async () => {
+      webpageService.load().then(async (re) => {
+        if (re) {
+          await nativeService.setBadge("✓");
+          await nativeService.setBadgeTextColor("white");
+          await nativeService.setBadgeBackgroundColor("rgb(48, 204, 204)");
+        }
+      });
     });
   }
 

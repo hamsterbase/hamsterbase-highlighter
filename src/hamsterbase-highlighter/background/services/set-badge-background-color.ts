@@ -6,7 +6,7 @@ export const setBadgeBackgroundColor = registrationService(
      * @see https://github.com/hamsterbase/hamsterbase/issues/27
      */
     if (chrome.action.setBadgeBackgroundColor) {
-      await chrome.action.setBadgeBackgroundColor({ color });
+      await chrome.action.setBadgeBackgroundColor({ color, tabId: _ctx.tabId });
     }
   },
   "setBadgeBackgroundColor"
