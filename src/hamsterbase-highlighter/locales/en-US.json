@@ -1,4 +1,5 @@
 {
+  "__i18n_ease__": "true",
   "backend.notion.agree_empty": "Please allow the extension to access and modify the database.",
   "backend.notion.database_id_empty": "database id is empty",
   "backend.notion.token_empty": "API token is empty",

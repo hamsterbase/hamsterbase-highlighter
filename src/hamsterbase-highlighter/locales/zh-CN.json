@@ -1,4 +1,5 @@
 {
+  "__i18n_ease__": "true",
   "backend.notion.agree_empty": "请允许扩展访问和修改数据库。",
   "backend.notion.database_id_empty": "数据库 ID 为空",
   "backend.notion.token_empty": "Token 为空",
