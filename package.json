@@ -6,8 +6,7 @@
   "author": "monster <monster@hamsterbase.com>",
   "scripts": {
     "build": "ts-node --esm scripts/build.mts",
-    "dev": "ts-node --esm scripts/dev.mts",
-    "format": "ts-node --esm scripts/format.mts"
+    "dev": "ts-node --esm scripts/dev.mts"
   },
   "devDependencies": {
     "@babel/traverse": "^7.22.4",
