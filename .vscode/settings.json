@@ -3,5 +3,6 @@
   "cSpell.words": ["vscf"],
   "i18nease.locale_path": "src/hamsterbase-highlighter/locales",
   "i18nease.locale_default": "en-US",
-  "i18nease.locale_other": ["zh-CN"]
+  "i18nease.locale_other": ["zh-CN"],
+  "i18nease.exclude_dir": ["src/vscf/**"]
 }
